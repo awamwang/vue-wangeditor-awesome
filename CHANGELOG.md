@@ -1,3 +1,7 @@
+## [3.1.2-1](https://github.com/awamwang/vue-wangeditor-awesome/compare/v3.1.2-0...v3.1.2-1) (2020-09-30)
+
+
+
 ## [3.1.2-0](https://github.com/awamwang/vue-wangeditor-awesome/compare/v3.1.1...v3.1.2-0) (2020-09-30)
 
 

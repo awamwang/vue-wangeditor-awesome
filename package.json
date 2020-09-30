@@ -1,7 +1,7 @@
 {
   "name": "vue-wangeditor-awesome",
   "projectName": "vue-wangeditor-awesome",
-  "version": "3.1.2-0",
+  "version": "3.1.2-1",
   "description": "中文富文本编辑工具wangEditor的Vue插件封装",
   "main": "dist/vue-wangeditor-awesome.js",
   "unpkg": "dist/vue-wangeditor-awesome.js",
