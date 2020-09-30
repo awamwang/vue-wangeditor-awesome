@@ -9,7 +9,7 @@ node_js:
 - lts/*
 - 10
 before_install:
-- sudo apt-get install jq -y
+# - sudo apt-get install jq -y
 install:
 - npm install
 - npm install -g conventional-changelog-cli
@@ -35,5 +35,7 @@ deploy:
     repo: awamwang/vue-wangeditor-awesome
   skip_cleanup: 'true'
 after_deploy:
-- chmod +x .travis/deploy.sh
-- ".travis/deploy.sh" 
+- export CONVENTIONAL_GITHUB_RELEASER_TOKEN=$GH_TOKEN
+- npm run github-release
+# - chmod +x .travis/deploy.sh
+# - ".travis/deploy.sh" 
