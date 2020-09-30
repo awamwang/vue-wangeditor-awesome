@@ -1,0 +1,79 @@
+{
+  "name": "vue-wangeditor-awesome",
+  "projectName": "vue-wangeditor-awesome",
+  "version": "3.1.1",
+  "description": "中文富文本编辑工具wangEditor的Vue插件封装",
+  "main": "dist/vue-wangeditor-awesome.js",
+  "unpkg": "dist/vue-wangeditor-awesome.js",
+  "jsnext:main": "dist/vue-wangeditor-awesome.js",
+  "umd": "dist/vue-wangeditor-awesome.umd.js",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "dependencies": {
+    "wangeditor": "^3.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "babel-loader": "^8.1.0",
+    "cypress": "^5.2.0",
+    "parcel-bundler": "^1.12.4",
+    "vue": "^2.6.12",
+    "vue-loader": "^15.9.3",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.12"
+  },
+  "scripts": {
+    "build": "npm run build-cjs && npm run build-umd",
+    "build-cjs": "parcel build --out-file vue-wangeditor-awesome.js src/index.js",
+    "build-umd": "parcel build --global VueWangEditor --out-file vue-wangeditor-awesome.js src/index.umd.js",
+    "prepublishVersion": "node .travis/version.js",
+    "test": "echo 'test'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/awamwang/vue-wangeditor-awesome.git"
+  },
+  "keywords": [
+    "wangeditor",
+    "vue-wangeditor-awesome",
+    "vue component",
+    "vue text editor",
+    "vue rich text editor",
+    "vue web editor",
+    "vue editor"
+  ],
+  "author": {
+    "name": "Awam M Wang",
+    "email": "keepgoingwm@gmail.com",
+    "url": "https://awam.wang"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/awamwang/vue-wangeditor-awesome/issues"
+  },
+  "homepage": "https://github.com/awamwang/vue-wangeditor-awesome#readme",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "browserslist": {
+    "production": [
+      "> 1%",
+      "last 2 versions",
+      "not ie <= 8"
+    ],
+    "modern": [
+      "last 1 chrome version",
+      "last 1 firefox version"
+    ],
+    "ssr": [
+      "node 8"
+    ]
+  },
+  "engines": {
+    "node": ">=8"
+  }
+}

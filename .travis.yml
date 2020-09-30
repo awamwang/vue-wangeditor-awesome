@@ -1,0 +1,33 @@
+os: linux
+dist: trusty
+language: node_js
+cache:
+  directories:
+  - node_modules
+  - "/home/travis/.cache/Cypress"
+node_js:
+- lts/*
+- 10
+before_install:
+- sudo apt-get install jq -y
+install:
+- npm install
+- cypress install
+before_script:
+script:
+- npm run test
+- npm run build
+after_success:
+- chmod +x .travis/push.sh
+- ".travis/push.sh"
+after_failure:
+- ls -a
+deploy:
+  provider: npm
+  email: wangnew2013@126.com
+  api_key:
+    secure: mff+Nl3xcWNLWm5Ahr3LMuilxY42MbM3fHA+GApAZX+sm35Jg0HZuI3oSVUHZGYgcAo6/dgIr1x7Kbh0Cq+9lVhSuZXdYkFFb5+NL5EhUYUKkvWTWusMYUGprKo+9ulHBWZt5mJpdLjgCT4jMXxqptb+Q32O6FZ1bReywCgNgMMDwI/7LHQqeAZA0FowBLC+UMoIEEwnnzw7ZRIOOfELSgyf6JeGBmTit1PENSKZxpj71utI/JV7bawQBQBbq1gWB1o6b87sSAKLqsPOs5heB+xRf0ZE89wJZy7VBXKUbz0nELeaTOZiGgPgaYx72pjWwrIQchMDnq9HPe2NOkIdWYfNQceD4mAfy+ykXdIy3q2HTE+hq6dCoYm8nGEvZXuEi2cNvBkeBRRK4mmAVEtqWpZosePPqIXFWuIG9ah1oLE0WVMeO45tX8rGllK8nz1SzuPk5Kxx7EforRGJPz2aoC7Y4ED2QSf62Grwf8k+voK0zTAjiTmLTnEwBHuTC5aaVxG5QpL19VmyHXRadN/Oa5u6Pn5M6lTtjYI/l9Uc9ZC7M3XNPocdmp1fT083OGp7zXi3H+w5GvfzMUa6PyZqwDl3xPZCwhqad/3zUUXeSIuE+Y4e2BbK0KGa5P7qjsLKqqIyuTtBJMMN6QQt5pqmPnReykQFZnKeQsiuAiwKQM8=
+  on:
+    tags: true
+    repo: awamwang/vue-wangeditor-awesome
+  skip_cleanup: 'true'
