@@ -18,11 +18,11 @@ install:
 - cypress install
 before_script:
 script:
-- npm run test
 - npm run build
+- npm run test
 after_success:
-- chmod +x .travis/build.sh
-- ".travis/build.sh"
+# - chmod +x .travis/build.sh
+# - ".travis/build.sh"
 after_failure:
 - ls -a
 deploy:
