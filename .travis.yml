@@ -12,6 +12,9 @@ before_install:
 - sudo apt-get install jq -y
 install:
 - npm install
+- npm install -g conventional-changelog-cli
+- npm install -g conventional-github-releaser
+# - npm install -g conventional-recommended-bump
 - cypress install
 before_script:
 script:
@@ -31,3 +34,6 @@ deploy:
     tags: true
     repo: awamwang/vue-wangeditor-awesome
   skip_cleanup: 'true'
+after_deploy:
+- chmod +x .travis/deploy.sh
+- ".travis/deploy.sh" 
