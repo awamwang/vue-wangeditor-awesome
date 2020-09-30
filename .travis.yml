@@ -21,8 +21,8 @@ script:
 - npm run test
 - npm run build
 after_success:
-- chmod +x .travis/push.sh
-- ".travis/push.sh"
+- chmod +x .travis/build.sh
+- ".travis/build.sh"
 after_failure:
 - ls -a
 deploy:

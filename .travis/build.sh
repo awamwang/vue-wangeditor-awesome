@@ -5,8 +5,9 @@ setup_git() {
   local name=$(cat package.json | jq '.author.name')
   local email=$(cat package.json | jq '.author.email')
 
-  git config --global user.email ${email}
-  git config --global user.name ${name}
+  echo "setup git name:${name} email:${email}"
+  git config --global user.email "${email}"
+  git config --global user.name "${name}"
 }
 
 npm_berfore_publish() {
