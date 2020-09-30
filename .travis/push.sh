@@ -2,8 +2,8 @@
 version_pattern='v?[0-9]+\.[0-9]+\.[0-9]+'
 
 setup_git() {
-  local name=$(cat package.json | jq 'author.name')
-  local email=$(cat package.json | jq 'author.email')
+  local name=$(cat package.json | jq '.author.name')
+  local email=$(cat package.json | jq '.author.email')
 
   git config --global user.email ${email}
   git config --global user.name ${name}

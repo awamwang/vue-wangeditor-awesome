@@ -1,7 +1,19 @@
 <template>
   <div class="vue-wang-editor">
     <slot name="toolbar"></slot>
-    <div ref="editor"></div>
+
+    <div ref="editor" v-if="!splitLayout"></div>
+
+    <template v-else>
+      <div ref="toolbar"></div>
+      <slot name="split">
+        <div style="padding: 1px 0; background: #ccc;"></div>
+      </slot>
+      <div  ref="container">
+        <!--可使用 min-height 实现编辑区域自动增加高度-->
+        <p>请输入内容</p>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -63,9 +75,14 @@ export default {
       required: false,
       default: () => ({})
     },
+
     disabledMenus: {
       type: Array,
       required: false
+    },
+
+    splitLayout: {
+      type: Boolean
     }
   },
   mounted() {
@@ -88,10 +105,13 @@ export default {
             }
           })
         }
-        console.log(this._options)
 
         // Instance
-        this.wang = new Editor(this.$refs.editor)
+        if (this.splitLayout) {
+          this.wang = new Editor(this.$refs.toolbar, this.$refs.container)
+        } else {
+          this.wang = new Editor(this.$refs.editor)
+        }
 
         Object.keys(this._options).forEach((key) => {
           this.wang.customConfig[key] = this._options[key]
@@ -190,71 +210,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.vue-wang-editor >>> .w-e-toolbar {
-  flex-wrap: wrap;
-}
-
-.w-e-text-container {
-}
-
-/* table 样式 */
-table {
-  border-top: 1px solid #ccc;
-  border-left: 1px solid #ccc;
-}
-table td,
-table th {
-  border-bottom: 1px solid #ccc;
-  border-right: 1px solid #ccc;
-  padding: 3px 5px;
-}
-table th {
-  border-bottom: 2px solid #ccc;
-  text-align: center;
-}
-
-/* blockquote 样式 */
-blockquote {
-  display: block;
-  border-left: 8px solid #d0e5f2;
-  padding: 5px 10px;
-  margin: 10px 0;
-  line-height: 1.4;
-  font-size: 100%;
-  background-color: #f1f1f1;
-}
-
-/* code 样式 */
-code {
-  display: inline-block;
-  *display: inline;
-  *zoom: 1;
-  background-color: #f1f1f1;
-  border-radius: 3px;
-  padding: 3px 5px;
-  margin: 0 3px;
-}
-pre code {
-  display: block;
-}
-
-/* ul ol 样式 */
-ul,
-ol {
-  margin: 10px 0 10px 20px;
-}
-/* ul > li {
-  list-style-type: disc;
-}
-ol > li {
-  list-style-type: decimal;
-}
-ul {
-  list-style-type: disc; // 解决一些被reset掉的情况
-}
-ol {
-  list-style-type: decimal; // 解决一些被reset掉的情况
-} */
-</style>
