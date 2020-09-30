@@ -13,8 +13,8 @@ setup_git() {
 npm_berfore_publish() {
   if [[ $TRAVIS_TAG =~ $version_pattern ]]; then
     echo "Npm publish ${TRAVIS_TAG}..."
-    npm run prepublish-version
-    npm run changelog
+    # npm run prepublish-version
+    # npm run changelog
   fi
 }
 
@@ -43,6 +43,6 @@ upload_files() {
 }
 
 setup_git
-npm_berfore_publish
+# npm_berfore_publish
 commit_website_files
 upload_files

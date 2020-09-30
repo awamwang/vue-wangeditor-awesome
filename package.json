@@ -34,8 +34,9 @@
     "build-cjs": "parcel build --out-file vue-wangeditor-awesome.js src/index.js",
     "build-umd": "parcel build --global VueWangEditor --out-file vue-wangeditor-awesome.js src/index.umd.js",
     "prepublish-version": "node .travis/version.js",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "github-release": "conventional-github-releaser -p angular -r 0",
+    "version": "npm run changelog && git add CHANGELOG.md",
     "version-recommend": "node .travis/version-recommend.js",
     "test": "echo 'test'"
   },
