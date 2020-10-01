@@ -23,17 +23,22 @@ npm install vue-wangeditor-awesome --save
 yarn add vue-wangeditor-awesome
 ```
 
+## Features
+
++ [wangEditor](https://github.com/wangeditor-team/wangEditor)的所有配置及功能
++ [菜单和编辑区域分离](https://www.kancloud.cn/wangfupeng/wangeditor3/335771)特性，通过[splitLayout](#split-layout)属性开启
+
 ## API
 
-API及使用方法继承了[vue-quill-editor](https://github.com/surmon-china/vue-quill-editor)
+API及使用方法继承了[vue-quill-editor](https://github.com/surmon-china/vue-quill-editor)，并添加了wangEditor的一些API
 
 ### options prop
 
-同vue-quill-editor
+会合并全局options后，赋值给wangEditor的`customConfig`，产生实例的最终配置。
 
 ### otherConfig
 
-同时为了方便，把[wangEditor的customConfig](https://www.kancloud.cn/wangfupeng/wangeditor3/335776)属性也放置hack(利用`$attrs`)到options中，方便使用。这些配置的优先级最高。
+为了方便，把[wangEditor的customConfig](https://www.kancloud.cn/wangfupeng/wangeditor3/335776)属性也放置hack(利用`$attrs`)到options中，方便使用。这些配置的优先级最高。
 
 所以你可以这么用
 
@@ -41,10 +46,22 @@ API及使用方法继承了[vue-quill-editor](https://github.com/surmon-china/vu
     <WangEditor
       v-model="content"
       :options="options"
+      debug
       :menus="['???']"
+      :colors="[
+        '#000000',
+        '#eeece0',
+        '#1c487f',
+        '#4d80bf',
+        '#c24f4a',
+        '#8baa4a',
+        '#7b5ba1',
+        '#46acc8',
+        '#f9963b',
+        '#ffffff'
+      ]"
       :disabled="false"
       @change="onEditorChange"
-      class="editor c-scroll"
       ref="myEditor"
     >
     </WangEditor>
@@ -59,6 +76,21 @@ API及使用方法继承了[vue-quill-editor](https://github.com/surmon-china/vu
       v-model="content"
       :options="options"
       :disabled-menus="['video']"
+      @change="onEditorChange"
+      ref="myEditor"
+    >
+    </WangEditor>
+```
+
+#### split-layout
+
+添加`split-layout`prop属性，用来支持menu和container拆分创建。
+
+```vue
+    <WangEditor
+      v-model="content"
+      :options="options"
+      split-layout
       :disabled="false"
       @change="onEditorChange"
       class="editor c-scroll"
@@ -67,9 +99,41 @@ API及使用方法继承了[vue-quill-editor](https://github.com/surmon-china/vu
     </WangEditor>
 ```
 
-### events
+### Methods
 
-同vue-quill-editor
+#### getJSON
+
+暴露wangEditor的getJSON方法，参考[获取JSON](https://www.kancloud.cn/wangfupeng/wangeditor3/455792)
+
+#### clear
+
+暴露wangEditor的clear方法，清楚内容
+
+### Events
+
+同vue-quill-editor，除了input和change，其他事件参数都是wangEditor实例本身
+
+#### ready
+
+wangEditor实例初始化完毕
+
+> 注意，可能相关DOM还没有渲染完成
+>
+
+#### input
+
+```js
+this.$emit('input', this._content)
+```
+#### change
+
+```js
+this.$emit('change', { html, text, wang })
+```
+
+#### blur
+
+#### focus
 
 ## 主题
 
@@ -80,6 +144,10 @@ wangEditor没有官方主题
 ```html
 <div class="ql-editor" v-html="content"></div>
 ```
+
+## ChangeLog
+
+see [CHANGELOG.md](CHANGELOG.md)
 
 ## 其他
 

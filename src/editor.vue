@@ -7,9 +7,9 @@
     <template v-else>
       <div ref="toolbar"></div>
       <slot name="split">
-        <div style="padding: 1px 0; background: #ccc;"></div>
+        <div style="padding: 1px 0; background: #ccc"></div>
       </slot>
-      <div  ref="container">
+      <div ref="container">
         <!--可使用 min-height 实现编辑区域自动增加高度-->
         <p>请输入内容</p>
       </div>
@@ -170,6 +170,12 @@ export default {
       } else {
         console.info('[vue wangEditor] get customConfig.onblur from options')
       }
+    },
+    clear() {
+      this.wang.txt.clear()
+    },
+    getJSON() {
+      return this.wang.txt.getJSON()
     }
   },
   watch: {
@@ -200,13 +206,7 @@ export default {
       if (this.wang) {
         this.wang.$textElem.attr('contenteditable', !newVal)
       }
-    },
-    clear() {
-      this.wang.txt.clear()
-    },
-    getJSON() {
-      return this.wang.txt.getJSON()
     }
-  }
+  },
 }
 </script>

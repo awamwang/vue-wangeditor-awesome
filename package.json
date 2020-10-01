@@ -18,12 +18,11 @@
     "@babel/core": "^7.11.6",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
+    "@vue/component-compiler-utils": "^3.2.0",
     "babel-loader": "^8.1.0",
-    "conventional-recommended-bump": "^6.0.10",
     "cypress": "^5.2.0",
     "parcel-bundler": "^1.12.4",
     "vue": "^2.6.12",
-    "vue-loader": "^15.9.3",
     "vue-template-compiler": "^2.6.12"
   },
   "peerDependencies": {
