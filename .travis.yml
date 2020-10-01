@@ -9,27 +9,23 @@ node_js:
 - lts/*
 - 10
 before_install:
-# - sudo apt-get install jq -y
 install:
 - npm install
 - npm install -g conventional-changelog-cli
 - npm install -g conventional-github-releaser
-# - npm install -g conventional-recommended-bump
 - cypress install
 before_script:
 script:
 - npm run build
 - npm run test
 after_success:
-# - chmod +x .travis/build.sh
-# - ".travis/build.sh"
 after_failure:
 - ls -a
 deploy:
   provider: npm
   email: wangnew2013@126.com
   api_key:
-    secure: mff+Nl3xcWNLWm5Ahr3LMuilxY42MbM3fHA+GApAZX+sm35Jg0HZuI3oSVUHZGYgcAo6/dgIr1x7Kbh0Cq+9lVhSuZXdYkFFb5+NL5EhUYUKkvWTWusMYUGprKo+9ulHBWZt5mJpdLjgCT4jMXxqptb+Q32O6FZ1bReywCgNgMMDwI/7LHQqeAZA0FowBLC+UMoIEEwnnzw7ZRIOOfELSgyf6JeGBmTit1PENSKZxpj71utI/JV7bawQBQBbq1gWB1o6b87sSAKLqsPOs5heB+xRf0ZE89wJZy7VBXKUbz0nELeaTOZiGgPgaYx72pjWwrIQchMDnq9HPe2NOkIdWYfNQceD4mAfy+ykXdIy3q2HTE+hq6dCoYm8nGEvZXuEi2cNvBkeBRRK4mmAVEtqWpZosePPqIXFWuIG9ah1oLE0WVMeO45tX8rGllK8nz1SzuPk5Kxx7EforRGJPz2aoC7Y4ED2QSf62Grwf8k+voK0zTAjiTmLTnEwBHuTC5aaVxG5QpL19VmyHXRadN/Oa5u6Pn5M6lTtjYI/l9Uc9ZC7M3XNPocdmp1fT083OGp7zXi3H+w5GvfzMUa6PyZqwDl3xPZCwhqad/3zUUXeSIuE+Y4e2BbK0KGa5P7qjsLKqqIyuTtBJMMN6QQt5pqmPnReykQFZnKeQsiuAiwKQM8=
+    secure: l1DfBx70F2wPxZpLLl7YHNoUevqht8stZm6KJrGS2INIE8rvpsHppjqW9DwYbXjZeYPQ5tPx3TWDXkPP2kM1A2XKLhk/hh2KSsvW01vB/oCOmsfdfJR2XHxwztLmoOgD+sLIVAiE5hJ7bJbcK1SPQWBswaf1NqPYSC+N2rGNTeuk5riGdb3dqOb6On5zkzfr71SQn0oEo8I827vmE5oF+8QfL/rgTWIbL/hovQkfX0GUASgozC4exbnT0DeMHyqNoFNdpPR6FdoeLUEn5KUxEC+Op08B3eff1Qg5j25XKlzoA8/4XF5NihskNw9Cw3e/uZ/ycFhiwp/ZiFANM31Z5COfkMBXaOiOQF/gmDQPK5yNYl3mtRuMvlhGm+J34DtN57HqCOQgDOM2iicrLAV1GSP+bNGNOMX7mzmqJPtu2kdEMAZIXg1FLQP/DSr3FwmSzhjxio8P8JSbdw2nVpZBHdCIfq4Kt9ALvSZRB7aDAWYDqOZ1iIxvSW9sR4wxPN41pOhzhSf3eRFmFxKWmu1cQfuowemvBOolmmg7YejPtVmGFegMlV1lxaHDzWQI9ZgAIVv6G7FVS2yBsWWElhV/WxBCQEq48gVwx52+oOI1d5mfpQ9KNBYZgoLsJ/gUB88J61jSE7FsiLF/MwlcVymhicDRbKp+y0C0Fe2JrcAuDak=
   on:
     tags: true
     repo: awamwang/vue-wangeditor-awesome
@@ -37,5 +33,3 @@ deploy:
 after_deploy:
 - export CONVENTIONAL_GITHUB_RELEASER_TOKEN=$GH_TOKEN
 - npm run github-release
-# - chmod +x .travis/deploy.sh
-# - ".travis/deploy.sh" 
