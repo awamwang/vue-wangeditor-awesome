@@ -12,6 +12,7 @@
     "src"
   ],
   "dependencies": {
+    "npm-force-resolutions": "0.0.3",
     "wangeditor": "^3.1.1"
   },
   "devDependencies": {
@@ -38,7 +39,11 @@
     "version": "npm run build && npm run changelog && git add CHANGELOG.md",
     "version-recommend": "node .travis/version-recommend.js",
     "prebuild": "rimraf ./dist && mkdir dist",
+    "preinstall": "npx npm-force-resolutions",
     "test": "echo 'test'"
+  },
+  "resolutions": {
+    "wangeditor": "3.1.1"
   },
   "repository": {
     "type": "git",
