@@ -12,6 +12,37 @@ Vue component for [wangEditor](https://github.com/wangeditor-team/wangEditor)
 
 中文富文本编辑工具[wangEditor](https://github.com/wangeditor-team/wangEditor)的Vue插件封装
 
+<!--ts-->
+   * [vue-wangeditor-awesome](#vue-wangeditor-awesome)
+      * [Install](#install)
+      * [Usage](#usage)
+         * [global register/全局组件](#global-register全局组件)
+         * [local import/局部引入](#local-import局部引入)
+      * [Features](#features)
+      * [API](#api)
+         * [options prop](#options-prop)
+         * [more props](#more-props)
+            * [disabled-menus](#disabled-menus)
+            * [split-layout](#split-layout)
+         * [Methods](#methods)
+            * [getJSON](#getjson)
+            * [clear](#clear)
+         * [Events](#events)
+            * [ready](#ready)
+            * [input](#input)
+            * [change](#change)
+            * [blur](#blur)
+            * [focus](#focus)
+      * [Themes/主题](#themes主题)
+      * [ChangeLog](#changelog)
+      * [其他](#其他)
+         * [图片](#图片)
+         * [关于版本](#关于版本)
+
+<!-- Added by: wangmeng, at: 2020年10月 4日 星期日 21时59分08秒 CST -->
+
+<!--te-->
+
 ## Install
 
 **NPM**

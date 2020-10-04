@@ -18,3 +18,5 @@ babel.config.js
 yarn.lock
 yarn-error.log
 TODO.md
+README.md.orig.*
+README.md.toc.*
