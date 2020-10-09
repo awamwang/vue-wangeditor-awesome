@@ -7,7 +7,7 @@ const install = (Vue, globalOptions) => {
   if (globalOptions) {
     vueEditor.props.globalOptions.default = () => globalOptions
   }
-  Vue.component(vueEditor.name, vueEditor)
+  Vue.component(globalOptions && globalOptions.directiveName || vueEditor.name, vueEditor)
 }
 
 const VueWangEditor = { Editor, vueEditor, install }

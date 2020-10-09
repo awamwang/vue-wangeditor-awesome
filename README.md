@@ -86,6 +86,21 @@ export default {
 
 通过props配置，并暴露了wangEditor的一些methods和events
 
+### 全局options
+
+在Vue.use中传入的options，除`directiveName`外，其他会作为wangEditor配置的默认值。
+
+`directiveName`用来指定Vue指令名称
+
+```js
+Vue.use(VueWangEditor, {
+  directiveName: 'wangEditor'
+})
+
+// in template
+`<div><wang-editor v-model="content"></wang-editor></div>`
+```
+
 ### options prop
 
 `options`属性会合并全局options后，在结合下面的更多属性，赋值给wangEditor的`customConfig`，产生最终配置。
