@@ -33,6 +33,7 @@
   },
   "scripts": {
     "build": "npm run build-cjs && npm run build-umd",
+    "cy-open": "cypress open -C cypress.json",
     "build-cjs": "parcel build --out-file vue-wangeditor-awesome.js src/index.js",
     "build-umd": "parcel build --global VueWangEditor --out-file vue-wangeditor-awesome.umd.js src/index.umd.js",
     "prepublish-version": "node .travis/version.js",
@@ -40,10 +41,11 @@
     "github-release": "conventional-github-releaser -p angular -r 1",
     "version": "npm run build && npm run changelog && npm run build-readme && git add README.md",
     "version-recommend": "node .travis/version-recommend.js",
+    "cy-run": "cypress run -C cypress.json",
     "build-readme": "gh-md-toc --insert README.md",
     "prebuild": "rimraf ./dist && mkdir dist",
     "preinstall": "npx npm-force-resolutions",
-    "test": "echo 'test'"
+    "test": "npm run cy-run"
   },
   "resolutions": {
     "wangeditor": "3.1.1"

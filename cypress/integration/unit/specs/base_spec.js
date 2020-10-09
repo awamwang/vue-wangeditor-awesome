@@ -1,42 +1,47 @@
-
-import Quill from 'quill'
 import Vue from 'vue/dist/vue.js'
-import VueQuillEditor, { quillEditor, install } from '../../../src/index.js'
-// import VueQuillEditorSsr from '../../../src/ssr.js'
+import VueWangEditor, {
+  Editor as WangEditor,
+  vueEditor,
+  install
+} from '../../../../dist/vue-wangeditor-awesome'
+// import VueWangEditorSsr from '../../../src/ssr.js'
 
 window.Vue = Vue
 
-// console.log('--------VueQuillEditor', VueQuillEditor)
-// console.log('--------VueQuillEditorSsr', VueQuillEditorSsr)
+// console.log('--------VueWangEditor', VueWangEditor)
+// console.log('--------VueWangEditorSsr', VueWangEditorSsr)
 
-describe('vue-quill-editor-next', () => {
-
-  Vue.use(VueQuillEditor, {
-    placeholder: 'global placeholder'
+describe('vue-wang-editor', () => {
+  Vue.use(VueWangEditor, {
+    directiveName: 'wangEditor',
+    test1: 'test1',
+    test2: 2,
+    test3: {},
+    test4: true
   })
-  // Vue.use(VueQuillEditorSsr, {
+  // Vue.use(VueWangEditorSsr, {
   //   placeholder: 'global ssr placeholder'
   // })
 
   // 测试解构是否成功
   it('can get the object in es module', () => {
     expect(typeof install).to.deep.equal('function')
-    expect(typeof quillEditor.methods.initialize).to.deep.equal('function')
+    expect(typeof vueEditor.methods.initialize).to.deep.equal('function')
   })
 
   // 全局安装
   describe('Global install spa:component', () => {
-    it(' - should can get the quill element', done => {
+    it(' - should can get the wangEditor element', (done) => {
       const vm = new Vue({
-        template: `<div><quill-editor v-model="content"></quill-editor></div>`,
+        template: `<div><wang-editor v-model="content"></wang-editor></div>`,
         data: {
-          content: '<p>test content</p>',
+          content: '<p>test content</p>'
         }
       }).$mount()
       expect(vm.$children[0].value).to.deep.equal('<p>test content</p>')
       Vue.nextTick(() => {
-        expect(vm.$children[0].quill instanceof Quill).to.equal(true)
-        expect(vm.$children[0].quill.getText()).to.deep.equal('test content\n')
+        expect(vm.$children[0].wang instanceof WangEditor).to.equal(true)
+        expect(vm.$children[0].wang.txt.text()).to.deep.equal('test content')
         done()
       })
     })
@@ -44,9 +49,9 @@ describe('vue-quill-editor-next', () => {
 
   // 全局配置测试
   describe('Get instance by attr ref and set global options', () => {
-    it(' - should get the quill instance and global options', done => {
+    it(' - should get the wangEditor instance and global options', (done) => {
       const vm = new Vue({
-        template: `<div><quill-editor ref="myTextEditor" v-model="content"></quill-editor></div>`,
+        template: `<div><wang-editor ref="myTextEditor" v-model="content"></wang-editor></div>`,
         data: {
           content: '<p>test content</p>'
         },
@@ -54,14 +59,14 @@ describe('vue-quill-editor-next', () => {
           editor() {
             return this.$refs.myTextEditor
           },
-          quill() {
-            return this.editor.quill
+          wangEditor() {
+            return this.editor.wang
           }
         }
       }).$mount()
       Vue.nextTick(() => {
-        expect(vm.quill instanceof Quill).to.equal(true)
-        expect(vm.quill.getText()).to.deep.equal('test content\n')
+        expect(vm.wangEditor instanceof WangEditor).to.equal(true)
+        expect(vm.wangEditor.txt.text()).to.deep.equal('test content')
         expect(Object.keys(vm.editor._options).length >= 5).to.equal(true)
         done()
       })
@@ -70,9 +75,9 @@ describe('vue-quill-editor-next', () => {
 
   // 全局配置覆盖
   describe('Set component options', () => {
-    it(' - should quill.placeholder === component.options.placeholder', done => {
+    it(' - should wangEditor.placeholder === component.options.placeholder', (done) => {
       const vm = new Vue({
-        template: `<div><quill-editor ref="myTextEditor" :options="editorOption" v-model="content"></quill-editor></div>`,
+        template: `<div><wang-editor ref="myTextEditor" :options="editorOption" v-model="content"></wang-editor></div>`,
         data: {
           content: '<p>test content</p>',
           editorOption: {
@@ -83,15 +88,16 @@ describe('vue-quill-editor-next', () => {
           editor() {
             return this.$refs.myTextEditor
           },
-          quill() {
-            return this.editor.quill
+          wangEditor() {
+            return this.editor.wangEditor
           }
         }
       }).$mount()
       Vue.nextTick(() => {
         // 配置是否等同局部配置
         const placeholder = vm.editor._options.placeholder
-        const isInclude = placeholder === 'component placeholder' || placeholder === undefined
+        const isInclude =
+          placeholder === 'component placeholder' || placeholder === undefined
         expect(isInclude).to.equal(true)
         done()
       })
@@ -100,15 +106,15 @@ describe('vue-quill-editor-next', () => {
 
   // 数据绑定
   describe('Component data binding', () => {
-    it(' - should change the quill content after change the component content data', done => {
+    it(' - should change the wangEditor content after change the component content data', (done) => {
       const vm = new Vue({
-        template: `<div><quill-editor v-model="content" ref="myTextEditor"></quill-editor></div>`,
+        template: `<div><wang-editor v-model="content" ref="myTextEditor"></wang-editor></div>`,
         data: {
           content: '<p>test content</p>'
         },
         computed: {
-          quill() {
-            return this.$refs.myTextEditor.quill
+          wangEditor() {
+            return this.$refs.myTextEditor.wang
           }
         },
         mounted() {
@@ -116,8 +122,10 @@ describe('vue-quill-editor-next', () => {
         }
       }).$mount()
       Vue.nextTick(() => {
-        expect(vm.quill.getText()).to.deep.equal('test change\n')
-        expect(vm.quill.editor.delta.ops).to.deep.equal([{ insert: "test change\n" }])
+        expect(vm.wangEditor.txt.text()).to.deep.equal('test change')
+        // expect(vm.wangEditor.editor.delta.ops).to.deep.equal([
+        //   { insert: 'test change' }
+        // ])
         done()
       })
     })
@@ -125,18 +133,18 @@ describe('vue-quill-editor-next', () => {
 
   // 广播事件
   describe('Component emit event and data binding by evennt', () => {
-    it(' - should capture event after the quill emit event', done => {
+    it(' - should capture event after the wangEditor emit event', (done) => {
       const eventLogs = []
       const vm = new Vue({
         template: `<div>
-                      <quill-editor ref="myTextEditor"
+                      <wang-editor ref="myTextEditor"
                                     :value="content"
                                     @blur="onEditorBlur"
                                     @focus="onEditorFocus"
                                     @ready="onEditorReady"
                                     @change="onEditorChange"
                                     @input="onEditorInput">
-                      </quill-editor>
+                      </wang-editor>
                   </div>
                   `,
         data: {
@@ -146,27 +154,27 @@ describe('vue-quill-editor-next', () => {
           editor() {
             return this.$refs.myTextEditor
           },
-          quill() {
-            return this.editor.quill
+          wangEditor() {
+            return this.editor.wang
           }
         },
         methods: {
-          onEditorBlur(quill) {
-            console.log('onEditorBlur', quill)
+          onEditorBlur(wangEditor) {
+            console.log('onEditorBlur', wangEditor)
             eventLogs.push('onEditorBlur')
           },
-          onEditorFocus(quill) {
-            console.log('onEditorFocus', quill)
+          onEditorFocus(wangEditor) {
+            console.log('onEditorFocus', wangEditor)
             eventLogs.push('onEditorFocus')
           },
-          onEditorReady(quill) {
+          onEditorReady(wangEditor) {
             eventLogs.push('onEditorReady')
             // mockEvennt(this.editor.$el.children[1])
             // triggerEvent(this.editor.$el.children[0].children[0].children[0], 'MouseEvent')
           },
-          onEditorChange({ quill, text, html }) {
+          onEditorChange({ wangEditor, text, html }) {
             eventLogs.push('onEditorChange' + text)
-            // expect(quill instanceof Quill).to.deep.equal(true)
+            // expect(wangEditor instanceof WangEditor).to.deep.equal(true)
             // expect(!!text).to.deep.equal(true)
             // expect(!!html).to.deep.equal(true)
           },
@@ -186,28 +194,28 @@ describe('vue-quill-editor-next', () => {
       expect(eventLogs[1]).to.deep.equal('mounted')
       done()
       // console.log('onEditorReady', this.editor.$el.children[1].children[0].dispatchEvent(event), event)
-      // expect(quill instanceof Quill).to.deep.equal(true)
-        // setTimeout(() => {
-          // this.content = '<p>test change</p>'
-        // }, 1000)
+      // expect(wangEditor instanceof WangEditor).to.deep.equal(true)
+      // setTimeout(() => {
+      // this.content = '<p>test change</p>'
+      // }, 1000)
     })
   })
 
   // 局部安装
   describe('Local install component', () => {
-    it(' - should work', done => {
+    it(' - should work', (done) => {
       const eventLogs = []
       const vm = new Vue({
         template: `<div>
-                      <vue-quill-editor-next ref="myTextEditor"
+                      <wang-editor ref="myTextEditor"
                                         v-model="content"
                                         :options="editorOption"
                                         @ready="onEditorReady">
-                      </vue-quill-editor-next>
+                      </wang-editor>
                   </div>
                   `,
         components: {
-          'VueQuillEditor': quillEditor
+          VueWangEditor: vueEditor
         },
         data: {
           content: '<p>test content</p>',
@@ -216,12 +224,12 @@ describe('vue-quill-editor-next', () => {
           }
         },
         computed: {
-          quill() {
-            return this.$refs.myTextEditor.quill
+          wangEditor() {
+            return this.$refs.myTextEditor.wang
           }
         },
         methods: {
-          onEditorReady(quill) {
+          onEditorReady(wangEditor) {
             eventLogs.push('onEditorReady')
           }
         },
@@ -231,27 +239,29 @@ describe('vue-quill-editor-next', () => {
       }).$mount()
       Vue.nextTick(() => {
         expect(eventLogs[0]).to.deep.equal('onEditorReady')
-        expect(vm.quill instanceof Quill).to.deep.equal(true)
-        expect(vm.quill.getText()).to.deep.equal('test change\n')
-        expect(vm.quill.editor.delta.ops).to.deep.equal([{ insert: "test change\n" }])
+        expect(vm.wangEditor instanceof WangEditor).to.deep.equal(true)
+        expect(vm.wangEditor.txt.text()).to.deep.equal('test change')
+        // expect(vm.wangEditor.editor.delta.ops).to.deep.equal([
+        //   { insert: 'test change' }
+        // ])
         done()
       })
     })
   })
 
   // 多个循环实例
-  describe('Multi edirot component instance', () => {
-    it(' - should update value after any change text', done => {
+  describe('Multi editor component instance', () => {
+    it(' - should update value after any change text', (done) => {
       const eventLogs = []
       const vm = new Vue({
         template: `<div>
-                      <quill-editor :key="key"
+                      <wang-editor :key="key"
                                     :value="content"
                                     :ref="'editor' + key"
                                     v-for="(content, key) in contents"
                                     :options="buildOptions(key)"
                                     @ready="onEditorReady(key)">
-                      </quill-editor>
+                      </wang-editor>
                   </div>
                   `,
         data: {
@@ -275,13 +285,23 @@ describe('vue-quill-editor-next', () => {
       expect(eventLogs[0]).to.deep.equal('a-onEditorReady')
       expect(eventLogs[1]).to.deep.equal('b-onEditorReady')
       expect(eventLogs[2]).to.deep.equal('c-onEditorReady')
-      expect(vm.$refs.editora[0].quill.getText()).to.deep.equal('a-test content\n')
-      expect(vm.$refs.editorb[0].quill.getText()).to.deep.equal('b-test content\n')
-      expect(vm.$refs.editorc[0].quill.getText()).to.deep.equal('c-test content\n')
+      expect(vm.$refs.editora[0].wang.txt.text()).to.deep.equal(
+        'a-test content'
+      )
+      expect(vm.$refs.editorb[0].wang.txt.text()).to.deep.equal(
+        'b-test content'
+      )
+      expect(vm.$refs.editorc[0].wang.txt.text()).to.deep.equal(
+        'c-test content'
+      )
       vm.contents.b = '<p>b-test change</p>'
       Vue.nextTick(() => {
-        expect(vm.$refs.editorb[0].quill.getText()).to.deep.equal('b-test change\n')
-        expect(vm.$refs.editorb[0].quill instanceof Quill).to.deep.equal(true)
+        expect(vm.$refs.editorb[0].wang.txt.text()).to.deep.equal(
+          'b-test change'
+        )
+        expect(
+          vm.$refs.editorb[0].wang instanceof WangEditor
+        ).to.deep.equal(true)
         done()
       })
     })
@@ -289,15 +309,15 @@ describe('vue-quill-editor-next', () => {
 
   // SSR 全局安装测试
   // describe('Global install ssr:directive', () => {
-  //   it(' - should get quill instance and capture event', done => {
+  //   it(' - should get wangEditor instance and capture event', done => {
   //     const eventLogs = []
   //     const vm = new Vue({
   //       template: `<div>
-  //                   <div class="quill-editor" 
+  //                   <div class="wang-editor"
   //                        ref="editor"
   //                        @ready="onEditorReady"
   //                        :value="content"
-  //                        v-quill:myQuillEditor="editorOption">
+  //                        v-wangEditor:myQuillEditor="editorOption">
   //                   </div>
   //                 </div>
   //                 `,
@@ -306,9 +326,9 @@ describe('vue-quill-editor-next', () => {
   //         editorOption: {}
   //       },
   //       methods: {
-  //         onEditorReady(quill) {
+  //         onEditorReady(wangEditor) {
   //           eventLogs.push('ssr/onEditorReady')
-  //           eventLogs.push(quill instanceof Quill)
+  //           eventLogs.push(wangEditor instanceof WangEditor)
   //         }
   //       },
   //       mounted() {
@@ -320,20 +340,20 @@ describe('vue-quill-editor-next', () => {
   //     expect(eventLogs[2]).to.deep.equal('ssr/mounted')
   //     vm.content = '<p>test ssr change</p>'
   //     Vue.nextTick(() => {
-  //       expect(vm.myQuillEditor.getText()).to.deep.equal('test ssr content\n')
+  //       expect(vm.myQuillEditor.txt.text()).to.deep.equal('test ssr content\n')
   //       done()
   //     })
   //   })
   // })
 
   // // 多个 SSR 平铺测试 placeholder: 'ssr placeholder'
-  // describe('Multi edirot directive instance', () => {
+  // describe('Multi editor directive instance', () => {
   //   it(' - should update value after any change text', done => {
   //     const eventLogs = []
   //     const vm = new Vue({
   //       template: `<div>
-  //                   <div class="quill-editor" 
-  //                        v-quill="buildOptions(key)"
+  //                   <div class="wang-editor"
+  //                        v-wangEditor="buildOptions(key)"
   //                        v-for="(content, key) in contents"
   //                        @ready="onEditorReady(key)"
   //                        :instance-name="'editor-' + key"
@@ -375,14 +395,14 @@ describe('vue-quill-editor-next', () => {
   //     expect(eventLogs[1]).to.deep.equal('b-onEditorReady')
   //     expect(eventLogs[2]).to.deep.equal('c-onEditorReady')
   //     expect(eventLogs[3]).to.deep.equal('ssr/mounted')
-  //     expect(vm['editor-a'] instanceof Quill).to.deep.equal(true)
-  //     expect(vm['editor-b'] instanceof Quill).to.deep.equal(true)
-  //     expect(vm['editor-c'] instanceof Quill).to.deep.equal(true)
-  //     expect(vm['editor-a'].getText()).to.deep.equal('a-test ssr content\n')
+  //     expect(vm['editor-a'] instanceof WangEditor).to.deep.equal(true)
+  //     expect(vm['editor-b'] instanceof WangEditor).to.deep.equal(true)
+  //     expect(vm['editor-c'] instanceof WangEditor).to.deep.equal(true)
+  //     expect(vm['editor-a'].txt.text()).to.deep.equal('a-test ssr content\n')
   //     vm.contents.b = '<span>b-test ssr change</span>'
   //     Vue.nextTick(() => {
   //       Vue.nextTick(() => {
-  //         expect(vm['editor-b'].getText()).to.deep.equal('b-test ssr change\n')
+  //         expect(vm['editor-b'].txt.text()).to.deep.equal('b-test ssr change\n')
   //         expect(vm['editor-b'].editor.delta.ops).to.deep.equal([{ insert: 'b-test ssr change\n' }])
   //         expect(vm['editor-b'].options.placeholder).to.deep.equal('b-ssr placeholder')
   //         expect(vm['editor-c'].options.placeholder).to.deep.equal('global ssr placeholder')
