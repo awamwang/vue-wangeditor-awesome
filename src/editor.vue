@@ -53,6 +53,7 @@ export default {
   name: 'VueWangEditor',
   data() {
     return {
+      wang: null,
       _options: {},
       _content: '',
       defaultOptions
