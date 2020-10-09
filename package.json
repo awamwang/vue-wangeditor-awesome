@@ -39,10 +39,10 @@
     "prepublish-version": "node .travis/version.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "github-release": "conventional-github-releaser -p angular -r 1",
-    "version": "npm run build && npm run changelog && npm run build-readme && git add README.md",
+    "version": "npm run build && npm run changelog && git add CHANGELOG.md && npm run build-readme&& git add README.md",
     "version-recommend": "node .travis/version-recommend.js",
     "cy-run": "cypress run -C cypress.json",
-    "build-readme": "gh-md-toc --insert README.md",
+    "build-readme": "gh-md-toc --insert README.md && gh-md-toc --insert README.zh_CN.md && rm README*.md.orig.* && rm README*.md.toc.*",
     "prebuild": "rimraf ./dist && mkdir dist",
     "preinstall": "npx npm-force-resolutions",
     "test": "npm run cy-run"

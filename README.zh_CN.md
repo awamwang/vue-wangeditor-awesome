@@ -10,17 +10,17 @@
 
 [English Doc](README.md)|[中文文档](README.zh_CN.md)
 
-Vue component for rich text editing tool [wangEditor](https://github.com/wangeditor-team/wangEditor)
+中文富文本编辑工具[wangEditor](https://github.com/wangeditor-team/wangEditor)的 Vue 插件封装
 
 <!--ts-->
    * [vue-wangeditor-awesome](#vue-wangeditor-awesome)
       * [Install](#install)
       * [Usage](#usage)
-         * [global components](#global-components)
-         * [local components](#local-components)
+         * [global register/全局组件](#global-register全局组件)
+         * [local import/局部引入](#local-import局部引入)
       * [Features](#features)
       * [API](#api)
-         * [global options](#global-options)
+         * [全局options](#全局options)
          * [options prop](#options-prop)
          * [more props](#more-props)
             * [disabled-menus](#disabled-menus)
@@ -34,13 +34,13 @@ Vue component for rich text editing tool [wangEditor](https://github.com/wangedi
             * [change](#change)
             * [blur](#blur)
             * [focus](#focus)
-      * [Themes](#themes)
+      * [Themes/主题](#themes主题)
       * [ChangeLog](#changelog)
-      * [More](#more)
-         * [Images](#images)
-         * [About version](#about-version)
+      * [其他](#其他)
+         * [图片](#图片)
+         * [关于版本](#关于版本)
 
-<!-- Added by: wangmeng, at: 2020年10月 9日 星期五 22时23分32秒 CST -->
+<!-- Added by: wangmeng, at: 2020年10月 9日 星期五 22时23分38秒 CST -->
 
 <!--te-->
 
@@ -56,7 +56,7 @@ yarn add vue-wangeditor-awesome
 
 ## Usage
 
-### global components
+### global register/全局组件
 
 ```js
 import Vue from 'vue'
@@ -65,7 +65,7 @@ import VueWangEditor from 'vue-wangeditor-awesome'
 Vue.use(VueWangEditor, /* { default global options } */)
 ```
 
-### local components
+### local import/局部引入
 
 ```js
 import { vueEditor } from 'vue-wangeditor-awesome'
@@ -79,18 +79,18 @@ export default {
 
 ## Features
 
-- All configurations and features of [wangEditor](https://github.com/wangeditor-team/wangEditor)
-- [Separation of menu and editing area](https://www.kancloud.cn/wangfupeng/wangeditor3/335771) feature, which is enabled through the [splitLayout](#split-layout) property
+- [wangEditor](https://github.com/wangeditor-team/wangEditor)的所有配置及功能
+- [菜单和编辑区域分离](https://www.kancloud.cn/wangfupeng/wangeditor3/335771)特性，通过[splitLayout](#split-layout)属性开启
 
 ## API
 
-Configure via component props，also expose some wangEditor's methods and events
+通过 props 配置，并暴露了 wangEditor 的一些 methods 和 events
 
-### global options
+### 全局options
 
-The options passed to Vue.use(), except for `directiveName`, others will be the default values configured for wangEditor.
+在Vue.use中传入的options，除`directiveName`外，其他会作为wangEditor配置的默认值。
 
-`directiveName` is used to specify the name of the Vue component.
+`directiveName`用来指定Vue组件名称
 
 ```js
 Vue.use(VueWangEditor, {
@@ -103,15 +103,13 @@ Vue.use(VueWangEditor, {
 
 ### options prop
 
-The `options` attribute will be merged with the global options, more props below. Finally assign merged result to the `customConfig` of wangEditor, used as the final configuration.
+`options`属性会合并全局 options 后，在结合下面的更多属性，赋值给 wangEditor 的`customConfig`，产生最终配置。
 
 ### more props
 
-For convenience, hack(using `$attrs`) [wangEditor's customConfig](https://www.kancloud.cn/wangfupeng/wangeditor3/335776) to component's props.  For example, the following `menus`, `colors`.
+为了方便，把[wangEditor 的 customConfig](https://www.kancloud.cn/wangfupeng/wangeditor3/335776)属性也 hack(利用`$attrs`)到组件的 props 中。例如下面的`menus`、`colors`，这些配置的优先级最高。
 
-> those configurations have the highest priority.
-
-So you can:
+所以你可以这么用
 
 ```vue
 <WangEditor
@@ -129,7 +127,7 @@ So you can:
 
 #### disabled-menus
 
-As a easier way to customize menus (toolbar), use `disabled-menus` prop to remove item from the default menus.
+为了方便定制 menus(toolbar)，加了一个`disabled-menus`prop，方便从默认的 menus 中剔除。
 
 ```vue
 <WangEditor v-model="content" :options="options" :disabled-menus="['video']" @change="onEditorChange" ref="myEditor">
@@ -138,7 +136,7 @@ As a easier way to customize menus (toolbar), use `disabled-menus` prop to remov
 
 #### split-layout
 
-Use the `split-layout` prop to support [Separation of menu and editing area](https://www.kancloud.cn/wangfupeng/wangeditor3/335771) feature.
+添加`split-layout`prop 属性，用来支持 menu 和 container 拆分创建。
 
 ```vue
 <WangEditor v-model="content" :options="options" split-layout :disabled="false" @change="onEditorChange" class="editor c-scroll" ref="myEditor">
@@ -149,21 +147,21 @@ Use the `split-layout` prop to support [Separation of menu and editing area](htt
 
 #### getJSON
 
-Expose the `getJSON` method of wangEditor, reference to [获取 JSON](https://www.kancloud.cn/wangfupeng/wangeditor3/455792)
+暴露 wangEditor 的`getJSON`方法，参考[获取 JSON](https://www.kancloud.cn/wangfupeng/wangeditor3/455792)
 
 #### clear
 
-Expose the `clear` method of wangEditor, use to clear the content
+暴露 wangEditor 的`clear`方法，清除内容
 
 ### Events
 
-Except for `input` and `change`, the parameters of other event callback are the wangEditor instance (this.wang)
+除了`input`和`change`，其他事件回调的参数都是 wangEditor 实例(this.wang)本身
 
 #### ready
 
-wangEditor instance is initialized
+wangEditor 实例初始化完毕
 
-> Note that: the relevant DOM may not be rendered
+> 注意，可能相关 DOM 还没有渲染完成
 
 #### input
 
@@ -181,9 +179,11 @@ this.$emit('change', { html, text, wang })
 
 #### focus
 
-## Themes
+## Themes/主题
 
-wangEditor has no official theme, you can use other editor's theme
+wangEditor 没有官方主题
+
+在使用时，可以借用其他主题
 
 ```html
 <WangEditor v-model="content" class="ql-editor"></WangEditor>
@@ -195,21 +195,19 @@ wangEditor has no official theme, you can use other editor's theme
 
 see [CHANGELOG.md](CHANGELOG.md)
 
-## More
+## 其他
 
-### Images
+### 图片
 
-The `uploadImgShowBase64` option is turned on by default, so that ti support images with no extra configurations.
+默认开启了`uploadImgShowBase64`选项，这样可以 0 配置支持图标。
 
-Better choice reffer to:
+优化参考：
 
-[wangEditor upload picture](https://www.kancloud.cn/wangfupeng/wangeditor3/335779)
+[wangEditor 上传图片](https://www.kancloud.cn/wangfupeng/wangeditor3/335779)
 
-### About version
+### 关于版本
 
-Follow the [wangEditor](https://www.npmjs.com/package/wangeditor) version
-
-
+跟随[wangEditor](https://www.npmjs.com/package/wangeditor)版本
 
 [build badge]: https://travis-ci.com/awamwang/vue-wangeditor-awesome.svg?branch=master
 [build page]: https://travis-ci.com/awamwang/vue-wangeditor-awesome

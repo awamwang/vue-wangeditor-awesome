@@ -112,5 +112,5 @@ TODOs.md
 RELEASE_NOTE*.md
 cypress/videos/
 \.vscode/
-README.md.orig.*
-README.md.toc.*
+README*.md.orig.*
+README*.md.toc.*
