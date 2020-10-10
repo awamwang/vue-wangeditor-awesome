@@ -1,4 +1,19 @@
-## [3.1.2-2](https://github.com/awamwang/vue-wangeditor-awesome/compare/v3.1.2-1...v3.1.2-2) (2020-10-01)
+## [4.0.1-0](https://github.com/awamwang/vue-wangeditor-awesome/compare/3.1.2-2...4.0.1-0) (2020-10-10)
+
+
+### Bug Fixes
+
+* **core:** wang在组件中的data未定义 ([858488b](https://github.com/awamwang/vue-wangeditor-awesome/commit/858488b8f2b2e4ac77868f5993d7dd8ec4ae3e0f))
+
+
+### Features
+
+* **core:** update wangEditor to v4.0.1, add some new features ([4cc0264](https://github.com/awamwang/vue-wangeditor-awesome/commit/4cc026433e1a81586f05196bc20aa517b70c90ba))
+* **options:** directiveName可自定义 ([2a0e006](https://github.com/awamwang/vue-wangeditor-awesome/commit/2a0e006e7f4e2a7dd6e383a137140738ea860852))
+
+
+
+## [3.1.2-2](https://github.com/awamwang/vue-wangeditor-awesome/compare/v3.1.2-1...3.1.2-2) (2020-10-01)
 
 
 ### Features
