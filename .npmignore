@@ -2,7 +2,6 @@
 .cache/
 .vscode/
 .travis/
-dist/stories/
 examples/
 test/
 cypress/

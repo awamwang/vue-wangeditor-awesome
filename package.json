@@ -1,19 +1,21 @@
 {
   "name": "vue-wangeditor-awesome",
   "projectName": "vue-wangeditor-awesome",
-  "version": "3.1.2-2",
-  "description": "中文富文本编辑工具wangEditor的Vue插件封装",
+  "version": "4.0.0",
+  "description": "文富文本编辑工具wangEditor的Vue插件封装",
   "main": "dist/vue-wangeditor-awesome.js",
-  "unpkg": "dist/vue-wangeditor-awesome.js",
+  "unpkg": "dist/vue-wangeditor-awesome.umd.js",
   "jsnext:main": "dist/vue-wangeditor-awesome.js",
   "umd": "dist/vue-wangeditor-awesome.umd.js",
+  "jsdelivr": "dist/vue-wangeditor-awesome.umd.js",
   "files": [
     "dist",
     "src"
   ],
   "dependencies": {
     "npm-force-resolutions": "0.0.3",
-    "wangeditor": "^3.1.1"
+    "vue-hot-reload-api": "^2.3.4",
+    "wangeditor": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -22,7 +24,9 @@
     "@vue/component-compiler-utils": "^3.2.0",
     "babel-loader": "^8.1.0",
     "cypress": "^5.2.0",
+    "highlight.js": "^10.2.1",
     "husky": "^4.3.0",
+    "i18next": "^19.8.2",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-wrapper": "^0.2.3",
     "vue": "^2.6.12",
@@ -34,13 +38,13 @@
   "scripts": {
     "build": "npm run build-cjs && npm run build-umd",
     "cy-open": "cypress open -C cypress.json",
-    "build-cjs": "parcel build --out-file vue-wangeditor-awesome.js src/index.js",
-    "build-umd": "parcel build --global VueWangEditor --out-file vue-wangeditor-awesome.umd.js src/index.umd.js",
+    "build-cjs": "parcel build --out-file vue-wangeditor-awesome.js --no-source-maps src/index.js",
+    "dev": "parcel watch --out-file vue-wangeditor-awesome.js --public-url ./dist/ --no-source-maps src/index.js",
+    "build-umd": "parcel build --global VueWangEditor --out-file vue-wangeditor-awesome.umd.js --no-source-maps src/index.umd.js",
     "prepublish-version": "node .travis/version.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "github-release": "conventional-github-releaser -p angular -r 1",
-    "version": "npm run build && npm run changelog && git add CHANGELOG.md && npm run build-readme&& git add README.md",
-    "version-recommend": "node .travis/version-recommend.js",
+    "release-github": "conventional-github-releaser -p angular -r 1",
+    "version": "npm run build && npm run changelog && git add CHANGELOG.md",
     "cy-run": "cypress run -C cypress.json",
     "build-readme": "gh-md-toc --insert README.md && gh-md-toc --insert README.zh_CN.md && rm README*.md.orig.* && rm README*.md.toc.*",
     "prebuild": "rimraf ./dist && mkdir dist",
@@ -48,7 +52,7 @@
     "test": "npm run cy-run"
   },
   "resolutions": {
-    "wangeditor": "3.1.1"
+    "wangeditor": "4.0.1"
   },
   "repository": {
     "type": "git",

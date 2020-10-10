@@ -11,7 +11,6 @@
       </slot>
       <div ref="container">
         <!--可使用 min-height 实现编辑区域自动增加高度-->
-        <p>请输入内容</p>
       </div>
     </template>
   </div>
@@ -23,29 +22,6 @@ import _Editor from 'wangeditor'
 
 const Editor = window.wangEditor || _Editor
 const defaultOptions = {
-  menus: [
-    'head', // 标题
-    'bold', // 粗体
-    'fontSize', // 字号
-    'fontName', // 字体
-    'italic', // 斜体
-    'underline', // 下划线
-    'strikeThrough', // 删除线
-    'foreColor', // 文字颜色
-    'backColor', // 背景颜色
-    'link', // 插入链接
-    'list', // 列表
-    'justify', // 对齐方式
-    'quote', // 引用
-    'emoticon', // 表情
-    'image', // 插入图片
-    'table', // 表格
-    'video', // 插入视频
-    'code', // 插入代码
-    'undo', // 撤销
-    'redo' // 重复
-  ],
-  fontNames: ['宋体', '微软雅黑', 'Arial', 'Tahoma', 'Verdana'],
   uploadImgShowBase64: true
 }
 
@@ -84,28 +60,39 @@ export default {
 
     splitLayout: {
       type: Boolean
+    },
+    highlight: {
+      type: Object
+    },
+    i18next: {
+      type: Object
+    },
+    extendedMenus: {
+      type: Object
+    },
+
+    beforeReady: {
+      type: Function
+    }
+  },
+  computed: {
+    selection() {
+      return this.wang.selection
     }
   },
   mounted() {
     this.initialize()
   },
   beforeDestroy() {
+    this.wang.destroy()
     delete this.wang
   },
   methods: {
     // Init Editor instance
-    initialize() {
+    async initialize() {
       if (this.$el) {
         // Options
         this._options = Object.assign({}, this.defaultOptions, this.globalOptions, this.options, this.$attrs)
-        if (Array.isArray(this.disabledMenus)) {
-          let idx
-          this.disabledMenus.forEach((m) => {
-            if ((idx = this._options.menus.indexOf(m)) > -1) {
-              this._options.menus.splice(idx, 1)
-            }
-          })
-        }
 
         // Instance
         if (this.splitLayout) {
@@ -113,10 +100,40 @@ export default {
         } else {
           this.wang = new Editor(this.$refs.editor)
         }
+        if (this.beforeReady) {
+          if ((await this.beforeReady(this.wang, this._options)) === false) {
+            return
+          }
+        }
+
+        // extend menu, add first
+        let extendedMenus = Object.assign({}, this._options.extendedMenus, this.extendedMenus)
+        if (extendedMenus && Object.prototype.toString.call(extendedMenus) === '[object Object]') {
+          Object.keys(extendedMenus).forEach((key) => {
+            this.wang.menus.extend(key, extendedMenus[key])
+          })
+        }
+        delete this._options.extendedMenus
 
         Object.keys(this._options).forEach((key) => {
-          this.wang.customConfig[key] = this._options[key]
+          this.wang.config[key] = this._options[key]
         })
+        if (Array.isArray(this.disabledMenus)) {
+          let idx
+          this.disabledMenus.forEach((m) => {
+            if ((idx = this.wang.config.menus.indexOf(m)) > -1) {
+              this.wang.config.menus.splice(idx, 1)
+            }
+          })
+        }
+        // highlight
+        if (this.highlight) {
+          this.wang.highlight = this.highlight
+        }
+        // i18n
+        if (this.i18next) {
+          this.wang.i18next = this.i18next
+        }
 
         this.initListeners()
 
@@ -140,8 +157,8 @@ export default {
     },
     initListeners() {
       // change
-      if (!this.wang.customConfig.onchange) {
-        this.wang.customConfig.onchange = (html) => {
+      if (!this._options.onchange) {
+        this.wang.config.onchange = (html) => {
           // let html = this.$refs.editor.children[0].innerHTML
           const wang = this.wang
           const text = this.wang.txt.text()
@@ -151,26 +168,29 @@ export default {
           this.$emit('change', { html, text, wang })
         }
       } else {
-        console.info('[vue wangEditor] get customConfig.onchange from options')
+        console.info('[vue wangEditor] get config.onchange from options')
       }
 
       // focus event
-      if (!this.wang.customConfig.onfocus) {
-        this.wang.customConfig.onfocus = (html) => {
+      if (!this._options.onfocus) {
+        this.wang.config.onfocus = (html) => {
           this.$emit('focus', this.wang)
         }
       } else {
-        console.info('[vue wangEditor] get customConfig.onfocus from options')
+        console.info('[vue wangEditor] get config.onfocus from options')
       }
 
       // blur event
-      if (!this.wang.customConfig.onblur) {
-        this.wang.customConfig.onblur = (html) => {
+      if (!this._options.onblur) {
+        this.wang.config.onblur = (html) => {
           this.$emit('blur', this.wang)
         }
       } else {
-        console.info('[vue wangEditor] get customConfig.onblur from options')
+        console.info('[vue wangEditor] get config.onblur from options')
       }
+    },
+    append(content) {
+      return this.wang.txt.append(content)
     },
     clear() {
       this.wang.txt.clear()
@@ -208,6 +228,6 @@ export default {
         this.wang.$textElem.attr('contenteditable', !newVal)
       }
     }
-  },
+  }
 }
 </script>

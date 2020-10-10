@@ -11,8 +11,28 @@ window.Vue = Vue
 // console.log('--------VueWangEditor', VueWangEditor)
 // console.log('--------VueWangEditorSsr', VueWangEditorSsr)
 
+// function mockClick(el) {
+//   var evt = new MouseEvent('click', {
+//     bubbles: false,
+//     cancelable: true,
+//     view: window
+//   })
+//   el.dispatchEvent(evt)
+// }
+// function mockInput(el, str) {
+//   var evt = new InputEvent('input', {
+//     inputType: 'insertText',
+//     data: str,
+//     dataTransfer: null,
+//     isComposing: false
+//   })
+//   dom.value = str
+//   dom.dispatchEvent(evt)
+// }
+
 describe('vue-wang-editor', () => {
   Vue.use(VueWangEditor, {
+    placeholder: 'global placeholder',
     directiveName: 'wangEditor',
     test1: 'test1',
     test2: 2,
@@ -31,13 +51,14 @@ describe('vue-wang-editor', () => {
 
   // 全局安装
   describe('Global install spa:component', () => {
+    const vm = new Vue({
+      template: `<div><wang-editor v-model="content"></wang-editor></div>`,
+      data: {
+        content: '<p>test content</p>'
+      }
+    }).$mount()
+
     it(' - should can get the wangEditor element', (done) => {
-      const vm = new Vue({
-        template: `<div><wang-editor v-model="content"></wang-editor></div>`,
-        data: {
-          content: '<p>test content</p>'
-        }
-      }).$mount()
       expect(vm.$children[0].value).to.deep.equal('<p>test content</p>')
       Vue.nextTick(() => {
         expect(vm.$children[0].wang instanceof WangEditor).to.equal(true)
@@ -53,7 +74,7 @@ describe('vue-wang-editor', () => {
       const vm = new Vue({
         template: `<div><wang-editor ref="myTextEditor" v-model="content"></wang-editor></div>`,
         data: {
-          content: '<p>test content</p>'
+          content: ''
         },
         computed: {
           editor() {
@@ -66,7 +87,10 @@ describe('vue-wang-editor', () => {
       }).$mount()
       Vue.nextTick(() => {
         expect(vm.wangEditor instanceof WangEditor).to.equal(true)
-        expect(vm.wangEditor.txt.text()).to.deep.equal('test content')
+        expect(vm.wangEditor.config.placeholder).to.deep.equal(
+          'global placeholder'
+        )
+        expect(vm.wangEditor.txt.text()).to.deep.equal('')
         expect(Object.keys(vm.editor._options).length >= 5).to.equal(true)
         done()
       })
@@ -123,16 +147,13 @@ describe('vue-wang-editor', () => {
       }).$mount()
       Vue.nextTick(() => {
         expect(vm.wangEditor.txt.text()).to.deep.equal('test change')
-        // expect(vm.wangEditor.editor.delta.ops).to.deep.equal([
-        //   { insert: 'test change' }
-        // ])
         done()
       })
     })
   })
 
   // 广播事件
-  describe('Component emit event and data binding by evennt', () => {
+  describe('Component emit event and data binding by event', () => {
     it(' - should capture event after the wangEditor emit event', (done) => {
       const eventLogs = []
       const vm = new Vue({
@@ -173,14 +194,19 @@ describe('vue-wang-editor', () => {
             // triggerEvent(this.editor.$el.children[0].children[0].children[0], 'MouseEvent')
           },
           onEditorChange({ wangEditor, text, html }) {
-            eventLogs.push('onEditorChange' + text)
-            // expect(wangEditor instanceof WangEditor).to.deep.equal(true)
-            // expect(!!text).to.deep.equal(true)
-            // expect(!!html).to.deep.equal(true)
+            eventLogs.push('onEditorChange,' + text)
+            expect(['test content', 'test change']).to.include(text)
+            expect([
+              '<p>test content</p>',
+              '<span>test change</span>'
+            ]).to.include(html)
           },
           onEditorInput(html) {
-            eventLogs.push('onEditorInput' + html)
-            // expect(html).to.deep.equal('<p>test change</p>')
+            eventLogs.push('onEditorInput,' + html)
+            expect([
+              '<p>test content</p>',
+              '<span>test change</span>'
+            ]).to.include(html)
           }
         },
         mounted() {
@@ -189,15 +215,18 @@ describe('vue-wang-editor', () => {
         }
       }).$mount()
 
-      // console.log('----------', eventLogs)
-      expect(eventLogs[0]).to.deep.equal('onEditorReady')
-      expect(eventLogs[1]).to.deep.equal('mounted')
-      done()
-      // console.log('onEditorReady', this.editor.$el.children[1].children[0].dispatchEvent(event), event)
-      // expect(wangEditor instanceof WangEditor).to.deep.equal(true)
-      // setTimeout(() => {
-      // this.content = '<p>test change</p>'
-      // }, 1000)
+      console.log('----------', eventLogs)
+      vm.$nextTick(() => {
+        expect(eventLogs).to.deep.equal([
+          'onEditorInput,<p>test content</p>',
+          'onEditorChange,test content',
+          'onEditorReady',
+          'mounted',
+          'onEditorInput,<span>test change</span>',
+          'onEditorChange,test change'
+        ])
+        done()
+      })
     })
   })
 
@@ -299,13 +328,15 @@ describe('vue-wang-editor', () => {
         expect(vm.$refs.editorb[0].wang.txt.text()).to.deep.equal(
           'b-test change'
         )
-        expect(
-          vm.$refs.editorb[0].wang instanceof WangEditor
-        ).to.deep.equal(true)
+        expect(vm.$refs.editorb[0].wang instanceof WangEditor).to.deep.equal(
+          true
+        )
         done()
       })
     })
   })
+
+  describe('extend menu', () => {})
 
   // SSR 全局安装测试
   // describe('Global install ssr:directive', () => {

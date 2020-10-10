@@ -10,48 +10,30 @@
 
 [English Doc](README.md)|[中文文档](README.zh_CN.md)
 
+
+
+热烈庆祝wangEditor升级为4.0版本——[新版本文档](http://www.wangeditor.com/doc/)
+
 中文富文本编辑工具[wangEditor](https://github.com/wangeditor-team/wangEditor)的 Vue 插件封装
-
-<!--ts-->
-   * [vue-wangeditor-awesome](#vue-wangeditor-awesome)
-      * [Install](#install)
-      * [Usage](#usage)
-         * [global register/全局组件](#global-register全局组件)
-         * [local import/局部引入](#local-import局部引入)
-      * [Features](#features)
-      * [API](#api)
-         * [全局options](#全局options)
-         * [options prop](#options-prop)
-         * [more props](#more-props)
-            * [disabled-menus](#disabled-menus)
-            * [split-layout](#split-layout)
-         * [Methods](#methods)
-            * [getJSON](#getjson)
-            * [clear](#clear)
-         * [Events](#events)
-            * [ready](#ready)
-            * [input](#input)
-            * [change](#change)
-            * [blur](#blur)
-            * [focus](#focus)
-      * [Themes/主题](#themes主题)
-      * [ChangeLog](#changelog)
-      * [其他](#其他)
-         * [图片](#图片)
-         * [关于版本](#关于版本)
-
-<!-- Added by: wangmeng, at: 2020年10月 9日 星期五 22时23分38秒 CST -->
-
-<!--te-->
 
 ## Install
 
-NPM
+### NPM
 
 ```shell
 npm install vue-wangeditor-awesome --save
 # or
 yarn add vue-wangeditor-awesome
+```
+
+### Browser
+
+使用 `dist/` 目录的 umd.js 文件（或者）
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/vue-wangeditor-awesome/dist/vue-wangeditor-awesome.umd.js"></script>
+或者
+<script src="https://cdn.jsdelivr.net/npm/vue-wangeditor-awesome"></script>
 ```
 
 ## Usage
@@ -79,8 +61,14 @@ export default {
 
 ## Features
 
-- [wangEditor](https://github.com/wangeditor-team/wangEditor)的所有配置及功能
-- [菜单和编辑区域分离](https://www.kancloud.cn/wangfupeng/wangeditor3/335771)特性，通过[splitLayout](#split-layout)属性开启
+- [wangEditor](https://github.com/wangeditor-team/wangEditor)的所有配置及功能（包括4.0版本新增特性）
+- [菜单和编辑区域分离](http://www.wangeditor.com/doc/pages/01-%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8/03-%E8%8F%9C%E5%8D%95%E5%92%8C%E7%BC%96%E8%BE%91%E5%8C%BA%E5%9F%9F%E5%88%86%E7%A6%BB.html)特性，通过[splitLayout](#split-layout)属性开启
+
+### 浏览器兼容性
+
+兼容常见的 PC 浏览器：Chrome，Firefox，Safar，Edge，QQ 浏览器，IE11。
+
+不支持移动端。
 
 ## API
 
@@ -101,13 +89,13 @@ Vue.use(VueWangEditor, {
 `<wang-editor v-model="content"></wang-editor>`
 ```
 
-### options prop
+### prop options
 
-`options`属性会合并全局 options 后，在结合下面的更多属性，赋值给 wangEditor 的`customConfig`，产生最终配置。
+`options`属性会合并全局 options 后，在结合下面的更多属性，赋值给 wangEditor 的`config`，产生最终配置。
 
 ### more props
 
-为了方便，把[wangEditor 的 customConfig](https://www.kancloud.cn/wangfupeng/wangeditor3/335776)属性也 hack(利用`$attrs`)到组件的 props 中。例如下面的`menus`、`colors`，这些配置的优先级最高。
+为了方便，把[wangEditor 的 config](http://www.wangeditor.com/doc/pages/03-%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95/)属性也 hack(利用`$attrs`)到组件的 props 中。例如下面的`menus`、`colors`，这些配置的优先级最高。
 
 所以你可以这么用
 
@@ -143,7 +131,103 @@ Vue.use(VueWangEditor, {
 </WangEditor>
 ```
 
+#### highlight
+
+支持代码高亮，参考[代码高亮](http://www.wangeditor.com/doc/pages/03-%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95/07-%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE.html)
+
+```vue
+<template>
+		<WangEditor
+      v-model="content"
+      :options="options"
+      :highlight="hljs"
+    >
+    </WangEditor>
+</template>
+
+<script>
+import hljs from 'highlight.js'
+import 'highlight.js/styles/monokai_sublime.css'
+  
+export default {
+  data() {
+    return {
+      hljs
+    }
+  },
+}
+</script>
+```
+
+#### i18next
+
+参考[关于国际化](#关于国际化)
+
+#### extended-menus
+
+参考[自定义扩展菜单](http://www.wangeditor.com/doc/pages/11-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%89%A9%E5%B1%95%E8%8F%9C%E5%8D%95/)，根据文档中的方法建立扩展menu
+
+##### 全局使用
+
+```js
+class AlertMenu {}
+
+Vue.use(VueWangEditor, {
+  alertMenu: AlertMenu
+})
+```
+
+##### 组件prop
+
+将扩展菜单名字-扩展菜单实现类的键值对（Object）传入`extended-menus` prop，会在创建时注册这些扩展菜单
+
+```vue
+    <WangEditor
+      v-model="content"
+      :options="options"
+      :menus="['alertMenu']"
+      :extended-menus="{alertMenu: AlertMenu}"
+    >
+    </WangEditor>
+```
+
+### wangEditor props
+
+#### selection
+
+返回`this.wang.selection`，参考[选区范围 API](http://www.wangeditor.com/doc/pages/08-%E5%B8%B8%E7%94%A8API/02-%E9%80%89%E5%8C%BA%E8%8C%83%E5%9B%B4API.html)
+
+### 生命周期钩子
+
+为了能全面定制wangEditor实例，添加了几个钩子
+
+#### beforeReady
+
+参数是wangEditor的实例和merge后的options，如果beforeReady明确返回false，则停止wangEditor的创建。
+
+可以在这个钩子中修改options，或者进行一些高级操作，例如[自定义 tooltip](http://www.wangeditor.com/doc/pages/11-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%89%A9%E5%B1%95%E8%8F%9C%E5%8D%95/05-%E8%87%AA%E5%AE%9A%E4%B9%89tooltip.html)
+
+```vue
+// beforeReady(this.wang, this._options)
+
+    <WangEditor
+      v-model="content"
+      :before-ready=“doSomeConfig”
+    >
+    </WangEditor>
+```
+
 ### Methods
+
+把部分方法挂到了组件的methods中，其他方法可以通过vm.wang获取wangEditor实例后调用
+
+#### append
+
+创建编辑器之后，继续追加内容
+
+#### insertHtml
+
+返回`this.wang.cmd.do`，参考[内容操作 API](http://www.wangeditor.com/doc/pages/08-%E5%B8%B8%E7%94%A8API/03-%E5%86%85%E5%AE%B9%E6%93%8D%E4%BD%9CAPI.html)
 
 #### getJSON
 
@@ -154,6 +238,8 @@ Vue.use(VueWangEditor, {
 暴露 wangEditor 的`clear`方法，清除内容
 
 ### Events
+
+在没有通过`onxxx` options修改wangEidtor的回调时，默认emit 下面事件
 
 除了`input`和`change`，其他事件回调的参数都是 wangEditor 实例(this.wang)本身
 
@@ -208,6 +294,40 @@ see [CHANGELOG.md](CHANGELOG.md)
 ### 关于版本
 
 跟随[wangEditor](https://www.npmjs.com/package/wangeditor)版本
+
+### 关于国际化
+
+把i18next传入prop `i18next`，会启用国际化特性，参考[多语言](http://www.wangeditor.com/doc/pages/12-%E5%A4%9A%E8%AF%AD%E8%A8%80/)
+
+```vue
+<template>
+		<WangEditor
+      v-model="content"
+      :options="options"
+      :i18next="i18n"
+      lang="en"
+    >
+    </WangEditor>
+</template>
+
+<script>
+import i18n from 'i18next'
+  
+export default {
+  data() {
+    return {
+      i18n
+    }
+  },
+}
+</script>
+```
+
+### 关于source-maps
+
+4.0的wangEditor npm包没有source maps，导致该组件也暂时无法提供source maps
+
+
 
 [build badge]: https://travis-ci.com/awamwang/vue-wangeditor-awesome.svg?branch=master
 [build page]: https://travis-ci.com/awamwang/vue-wangeditor-awesome
