@@ -1,3 +1,12 @@
+## [4.0.2-0](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.0.1...v4.0.2-0) (2020-10-12)
+
+
+### Bug Fixes
+
+* npm 没有dist目录(ci问题修复) ([a7f6a40](https://github.com/awamwang/vue-wangeditor-awesome/commit/a7f6a407cac4406a138dee1d7b4b708e64c11e47))
+
+
+
 ## [4.0.1](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.0.1-0...v4.0.1) (2020-10-12)
 
 
