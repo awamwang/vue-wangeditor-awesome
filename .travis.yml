@@ -20,6 +20,7 @@ script:
 - npm run test
 deploy:
   cleanup: 'true'
+  skip_cleanup: 'true'
   provider: npm
   email: wangnew2013@126.com
   api_key:
