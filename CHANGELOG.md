@@ -1,4 +1,8 @@
-## [4.0.1-0](https://github.com/awamwang/vue-wangeditor-awesome/compare/3.1.2-2...4.0.1-0) (2020-10-10)
+## [4.0.1](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.0.1-0...v4.0.1) (2020-10-12)
+
+
+
+## [4.0.1-0](https://github.com/awamwang/vue-wangeditor-awesome/compare/3.1.2-2...v4.0.1-0) (2020-10-10)
 
 
 ### Bug Fixes
