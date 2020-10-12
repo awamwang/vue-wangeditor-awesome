@@ -13,7 +13,6 @@
     "src"
   ],
   "dependencies": {
-    "npm-force-resolutions": "0.0.3",
     "vue-hot-reload-api": "^2.3.4",
     "wangeditor": "^4.0.1"
   },
@@ -48,11 +47,7 @@
     "cy-run": "cypress run -C cypress.json",
     "build-readme": "gh-md-toc --insert README.md && gh-md-toc --insert README.zh_CN.md && rm README*.md.orig.* && rm README*.md.toc.*",
     "prebuild": "rimraf ./dist && mkdir dist",
-    "preinstall": "npx npm-force-resolutions",
     "test": "npm run cy-run"
-  },
-  "resolutions": {
-    "wangeditor": "4.0.1"
   },
   "repository": {
     "type": "git",
