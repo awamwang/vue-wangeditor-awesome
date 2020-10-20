@@ -8,6 +8,7 @@
   "jsnext:main": "dist/vue-wangeditor-awesome.js",
   "umd": "dist/vue-wangeditor-awesome.umd.js",
   "jsdelivr": "dist/vue-wangeditor-awesome.umd.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
     "src"
@@ -28,6 +29,7 @@
     "i18next": "^19.8.2",
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-wrapper": "^0.2.3",
+    "typescript": "^4.0.3",
     "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12"
   },
@@ -37,7 +39,8 @@
   "scripts": {
     "build": "npm run build-cjs && npm run build-umd",
     "cy-open": "cypress open -C cypress.json",
-    "build-cjs": "parcel build --out-file vue-wangeditor-awesome.js --no-source-maps src/index.js",
+    "build-cjs": "parcel build --out-file vue-wangeditor-awesome.js --no-source-maps src/index.ts",
+    "build-ts": "tsc src/index.ts",
     "dev": "parcel watch --out-file vue-wangeditor-awesome.js --public-url ./dist/ --no-source-maps src/index.js",
     "build-umd": "parcel build --global VueWangEditor --out-file vue-wangeditor-awesome.umd.js --no-source-maps src/index.umd.js",
     "prepublish-version": "node .travis/version.js",
