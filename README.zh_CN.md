@@ -12,9 +12,13 @@
 
 
 
-热烈庆祝wangEditor升级为4.0版本——[新版本文档](http://www.wangeditor.com/doc/)
+wangEditor升级为4.0版本——[新版本文档](http://www.wangeditor.com/doc/)
 
 中文富文本编辑工具[wangEditor](https://github.com/wangeditor-team/wangEditor)的 Vue 插件封装
+
+[TOC]
+
+
 
 ## Install
 
@@ -31,9 +35,9 @@ yarn add vue-wangeditor-awesome
 使用 `dist/` 目录的 umd.js 文件（或者）
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vue-wangeditor-awesome/dist/vue-wangeditor-awesome.umd.js"></script>
-或者
 <script src="https://cdn.jsdelivr.net/npm/vue-wangeditor-awesome"></script>
+or
+<script src="https://cdn.jsdelivr.net/npm/vue-wangeditor-awesome/dist/vue-wangeditor-awesome.umd.js"></script>
 ```
 
 ## Usage

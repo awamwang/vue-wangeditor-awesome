@@ -10,9 +10,13 @@
 
 [English Doc](README.md)|[中文文档](README.zh_CN.md)
 
-Warmly celebrate the upgrade of wangEditor to version 4.0-[new version document](http://www.wangeditor.com/doc/)
 
-Vue component for rich text editing tool [wangEditor](https://github.com/wangeditor-team/wangEditor)
+
+wangEditor upgrade to version 4.0-[new version document](http://www.wangeditor.com/doc/)
+
+Vue component for RichText editor [wangEditor](https://github.com/wangeditor-team/wangEditor)
+
+[toc]
 
 ## Install
 
@@ -29,9 +33,9 @@ yarn add vue-wangeditor-awesome
 Use the umd.js file in the `dist/`
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/vue-wangeditor-awesome/dist/vue-wangeditor-awesome.umd.js"></script>
-or
 <script src="https://cdn.jsdelivr.net/npm/vue-wangeditor-awesome"></script>
+or
+<script src="https://cdn.jsdelivr.net/npm/vue-wangeditor-awesome/dist/vue-wangeditor-awesome.umd.js"></script>
 ```
 
 ## Usage
@@ -71,11 +75,11 @@ Mobile terminal is not supported.
 
 ## API
 
-Configure via component props，also expose some wangEditor's methods and events
+Configure via component props，also expose some methods and events of wangEditor.
 
 ### global options
 
-The options passed to Vue.use(), except for `directiveName`, other props will be the default values configured for wangEditor.
+The options passed to `Vue.use(),` except for `directiveName`, other props will be the default values configured for wangEditor.
 
 use `directiveName` to specify the name of the Vue component.
 
