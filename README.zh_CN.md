@@ -186,13 +186,30 @@ Vue.use(VueWangEditor, {
 将扩展菜单名字-扩展菜单实现类的键值对（Object）传入`extended-menus` prop，会在创建时注册这些扩展菜单
 
 ```vue
+<template>
     <WangEditor
       v-model="content"
       :options="options"
-      :menus="['alertMenu']"
-      :extended-menus="{alertMenu: AlertMenu}"
+      :menus="['newMenu']"
+      :extended-menus="{newMenu: NewMenu}"
     >
     </WangEditor>
+</template>
+
+<script>
+import { vueEditor, Editor } from 'vue-wangeditor-awesome/src/index'
+const { BtnMenu, DropListMenu, PanelMenu, DropList, Panel, Tooltip } = Editor.menuConstructors
+
+class NewMenu extends BtnMenu {}
+  
+export default {
+  data() {
+    return {
+      NewMenu
+    }
+  },
+}
+</script>
 ```
 
 ### wangEditor props
@@ -205,14 +222,21 @@ Vue.use(VueWangEditor, {
 
 为了能全面定制wangEditor实例，添加了几个钩子
 
-#### beforeReady
+#### instanceCreated
 
-参数是wangEditor的实例和merge后的options，如果beforeReady明确返回false，则停止wangEditor的创建。
+在wangEditor实例创建后立即执行
+
+`Function`类型，接受两个参数，如果明确返回`false`，则终止wangEditor创建编辑器的后续过程（即不执行create方法），并执行销毁处理。
+
+| 名称     | 描述             | 组件内部值    |
+| -------- | ---------------- | ------------- |
+| instance | wangEditor的实例 | this.wang     |
+| options  | merge后的options | this._options |
 
 可以在这个钩子中修改options，或者进行一些高级操作，例如[自定义 tooltip](http://www.wangeditor.com/doc/pages/11-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%89%A9%E5%B1%95%E8%8F%9C%E5%8D%95/05-%E8%87%AA%E5%AE%9A%E4%B9%89tooltip.html)
 
 ```vue
-// beforeReady(this.wang, this._options)
+// instanceCreated(this.wang, this._options)
 
     <WangEditor
       v-model="content"
@@ -220,6 +244,17 @@ Vue.use(VueWangEditor, {
     >
     </WangEditor>
 ```
+
+#### afterConfig
+
+在wangEditor的设置完毕后，调用create前执行。可以在这个钩子中对wangEditor的config进行最终修改。
+
+`Function`类型，接受两个参数，如果明确返回`false`，则终止wangEditor创建编辑器的后续过程（即不执行create方法），并执行销毁处理。
+
+| 名称     | 描述                       | 组件内部值       |
+| -------- | -------------------------- | ---------------- |
+| instance | wangEditor的实例           | this.wang        |
+| config   | wangEditor实例的config对象 | this.wang.config |
 
 ### Methods
 

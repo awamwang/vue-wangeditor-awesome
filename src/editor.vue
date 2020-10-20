@@ -71,7 +71,11 @@ export default {
       type: Object
     },
 
-    beforeReady: {
+    // Lifecycle
+    instanceCreated: {
+      type: Function
+    },
+    afterConfig: {
       type: Function
     }
   },
@@ -84,8 +88,7 @@ export default {
     this.initialize()
   },
   beforeDestroy() {
-    this.wang.destroy()
-    delete this.wang
+    this.destroy()
   },
   methods: {
     // Init Editor instance
@@ -100,8 +103,9 @@ export default {
         } else {
           this.wang = new Editor(this.$refs.editor)
         }
-        if (this.beforeReady) {
-          if ((await this.beforeReady(this.wang, this._options)) === false) {
+        if (this.instanceCreated) {
+          if ((await this.instanceCreated(this.wang, this._options)) === false) {
+            this.destroy()
             return
           }
         }
@@ -137,6 +141,11 @@ export default {
 
         this.initListeners()
 
+        if (this.afterConfig) {
+          if ((await this.afterConfig(this.wang, this.wang.config)) === false) {
+            return
+          }
+        }
         this.wang.create()
 
         this.wang.$textElem.attr('contenteditable', false)
@@ -197,6 +206,11 @@ export default {
     },
     getJSON() {
       return this.wang.txt.getJSON()
+    },
+
+    destroy() {
+      this.wang.destroy()
+      delete this.wang
     }
   },
   watch: {

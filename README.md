@@ -189,13 +189,30 @@ Vue.use(VueWangEditor, {
 Pass the key-value pair (Object, key extended menu name and value is extended menu class) into the `extended-menus` prop, and these extended menus will be registered when they are created
 
 ```vue
+<template>
     <WangEditor
       v-model="content"
       :options="options"
-      :menus="['alertMenu']"
-      :extended-menus="{alertMenu: AlertMenu}"
+      :menus="['newMenu']"
+      :extended-menus="{newMenu: NewMenu}"
     >
     </WangEditor>
+</template>
+
+<script>
+import { vueEditor, Editor } from 'vue-wangeditor-awesome/src/index'
+const { BtnMenu, DropListMenu, PanelMenu, DropList, Panel, Tooltip } = Editor.menuConstructors
+
+class NewMenu extends BtnMenu {}
+  
+export default {
+  data() {
+    return {
+      NewMenu
+    }
+  },
+}
+</script>
 ```
 
 ### wangEditor props
@@ -208,14 +225,21 @@ return `this.wang.selection`，参考[Selection Area API](http://www.wangeditor.
 
 In order to fully customize the wangEditor instance, several hooks have been added
 
-#### beforeReady
+#### instanceCreated
 
-The parameters are the instance of wangEditor and the options after the merge. If `beforeReady` explicitly returns `false`, the creation of wangEditor will be stopped.
+Execute immediately after the wangEditor instance is created
+
+`Function` type, accepts two parameters, if explicitly returns `false`, the subsequent process of wangEditor creating the editor will be terminated ( the create method not call), then call destroy.
+
+| Name     | Description         | Component inner value |
+| -------- | ------------------- | --------------------- |
+| instance | wangEditor instance | this.wang             |
+| options  | merged options      | this._options         |
 
 You can modify the options in this hook, or perform some advanced operations, such as  [Customize tooltip](http://www.wangeditor.com/doc/pages/11-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%89%A9%E5%B1%95%E8%8F%9C%E5%8D%95/05-%E8%87%AA%E5%AE%9A%E4%B9%89tooltip.html)
 
 ```vue
-// beforeReady(this.wang, this._options)
+// instanceCreated(this.wang, this._options)
 
     <WangEditor
       v-model="content"
@@ -223,6 +247,19 @@ You can modify the options in this hook, or perform some advanced operations, su
     >
     </WangEditor>
 ```
+
+#### afterConfig
+
+After the wangEditor is configured, and before calling create.  The config of wangEditor can be finally modified in this hook.
+
+`Function` type, accepts two parameters, if explicitly returns `false`, the subsequent process of wangEditor creating the editor will be terminated ( the create method not call), then call destroy.
+
+| Name     | Description                          | Component inner value |
+| -------- | ------------------------------------ | --------------------- |
+| instance | wangEditor instance                  | this.wang             |
+| config   | config object of wangEditor instance | this.wang.config      |
+
+### Methods
 
 ### Methods
 
