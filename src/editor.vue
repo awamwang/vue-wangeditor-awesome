@@ -165,6 +165,7 @@ export default {
 
         if (this.afterConfig) {
           if ((await this.afterConfig(this.wang, this.wang.config)) === false) {
+            this.destroy()
             return
           }
         }
