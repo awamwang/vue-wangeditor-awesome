@@ -142,7 +142,7 @@ describe('vue-wang-editor', () => {
           }
         },
         mounted() {
-          this.content = '<span>test change</span>'
+          this.wangEditor.txt.html('<span>test change</span>')
         }
       }).$mount()
       Vue.nextTick(() => {
@@ -211,21 +211,21 @@ describe('vue-wang-editor', () => {
         },
         mounted() {
           eventLogs.push('mounted')
-          this.content = '<span>test change</span>'
+          this.wangEditor.txt.html('<span>test change</span>')
         }
       }).$mount()
 
-      console.log('----------', eventLogs)
-      vm.$nextTick(() => {
-        expect(eventLogs).to.deep.equal([
-          'onEditorInput,<p>test content</p>',
-          'onEditorChange,test content',
-          'onEditorReady',
-          'mounted',
-          'onEditorInput,<span>test change</span>',
-          'onEditorChange,test change'
-        ])
-        done()
+      cy.wait(1000).then(() => {
+        console.log('----------', eventLogs)
+        vm.$nextTick(() => {
+          expect(eventLogs).to.deep.equal([
+            'onEditorReady',
+            'mounted',
+            'onEditorInput,<span>test change</span>',
+            'onEditorChange,test change'
+          ])
+          done()
+        })
       })
     })
   })
@@ -263,7 +263,7 @@ describe('vue-wang-editor', () => {
           }
         },
         mounted() {
-          this.content = '<span>test change</span>'
+          this.wangEditor.txt.html('<span>test change</span>')
         }
       }).$mount()
       Vue.nextTick(() => {
