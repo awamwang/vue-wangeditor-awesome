@@ -1,3 +1,3 @@
-import VueWangEditor from './index'
+var VueWangEditor = require('./index').default
 
 module.exports = VueWangEditor
