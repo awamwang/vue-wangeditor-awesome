@@ -1,3 +1,19 @@
+## [4.0.5](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.0.4...v4.0.5) (2020-10-26)
+
+
+### Bug Fixes
+
+* afterConfig 返回false 忘记destroy ([9e3e840](https://github.com/awamwang/vue-wangeditor-awesome/commit/9e3e840223ece508fa5ac65dc60672102e5e1e14))
+
+
+### Features
+
+* **api:** rename lifecycle beforeReady to instanceCreated; add afterConfig lifecycle ([bc56abb](https://github.com/awamwang/vue-wangeditor-awesome/commit/bc56abbf0b136cc318d3c41b273bfa06e0af889c))
+* **menus:** 自定义的addClass menu，解决一些特殊样式场景 ([f07be5c](https://github.com/awamwang/vue-wangeditor-awesome/commit/f07be5cbe8c72f9e2e29c095b0076e800c1440d0))
+* **wangeditor:** wangEditor 4.0.5 ([4906b6b](https://github.com/awamwang/vue-wangeditor-awesome/commit/4906b6b7eddcb79bd6860295a4cc882f201fa349))
+
+
+
 ## [4.0.4](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.0.3...v4.0.4) (2020-10-20)
 
 
