@@ -65,7 +65,18 @@ export default {
 ## Features
 
 - All configurations and features of [wangEditor](https://github.com/wangeditor-team/wangEditor)
-- [Separation of menu and editing area](http://www.wangeditor.com/doc/pages/01-%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8/03-%E8%8F%9C%E5%8D%95%E5%92%8C%E7%BC%96%E8%BE%91%E5%8C%BA%E5%9F%9F%E5%88%86%E7%A6%BB.html) feature, which is enabled through the [splitLayout](#split-layout) property
+-  feature, which is enabled through the [splitLayout](#split-layout) property
+- Some custom menu extensions, refer to [Built-in custom menu (experimental stage)](#Built-in custom menu)
+
+### Built-in custom menu
+
+> experimental stage
+
+For convenience, add some custom menu extensions, use [other-extended-menus](#other-extended-menus) to enable them
+
+#### addClass
+
+Modify the `class` attribute of the selected element
 
 ### Browser compatibility
 
@@ -180,7 +191,7 @@ first, build an extended menu according to the method in the document
 class AlertMenu {}
 
 Vue.use(VueWangEditor, {
-  alertMenu: AlertMenu
+  extendedMenus: { alertMenu: AlertMenu }
 })
 ```
 
@@ -213,6 +224,17 @@ export default {
   },
 }
 </script>
+```
+
+#### other-extended-menus
+
+Boolean | Array
+
+Specify which custom menus to enable
+
+```vue
+other-extended-menus=“true”
+other-extended-menus=“[]”
 ```
 
 ### wangEditor props

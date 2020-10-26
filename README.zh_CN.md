@@ -67,6 +67,17 @@ export default {
 
 - [wangEditor](https://github.com/wangeditor-team/wangEditor)的所有配置及功能（包括4.0版本新增特性）
 - [菜单和编辑区域分离](http://www.wangeditor.com/doc/pages/01-%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8/03-%E8%8F%9C%E5%8D%95%E5%92%8C%E7%BC%96%E8%BE%91%E5%8C%BA%E5%9F%9F%E5%88%86%E7%A6%BB.html)特性，通过[splitLayout](#split-layout)属性开启
+- 一些自定义menu扩展，参考[内置的自定义menu](#内置的自定义menu)
+
+### 内置的自定义menu
+
+> 实验阶段
+
+为了方便，添加一些自定义menu扩展，通过[other-extended-menus](#other-extended-menus) prop启用
+
+#### addClass
+
+修改选中元素的class属性
 
 ### 浏览器兼容性
 
@@ -177,7 +188,7 @@ export default {
 class AlertMenu {}
 
 Vue.use(VueWangEditor, {
-  alertMenu: AlertMenu
+  extendedMenus: { alertMenu: AlertMenu }
 })
 ```
 
@@ -210,6 +221,17 @@ export default {
   },
 }
 </script>
+```
+
+#### other-extended-menus
+
+Boolean | Array
+
+指定启用哪些组件提供的自定义menu
+
+```vue
+other-extended-menus=“true”
+other-extended-menus=“[]”
 ```
 
 ### wangEditor props

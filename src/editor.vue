@@ -17,10 +17,12 @@
 </template>
 
 <script>
-// require sources
-import _Editor from 'wangeditor'
+import { Editor } from './index'
 
-const Editor = window.wangEditor || _Editor
+function testInList(item, list) {
+  return list === true || list.includes(item)
+}
+
 const defaultOptions = {
   uploadImgShowBase64: true
 }
@@ -77,7 +79,12 @@ export default {
     },
     afterConfig: {
       type: Function
-    }
+    },
+
+    otherExtendedMenus: {
+      // 组件的一些扩展菜单
+      type: Boolean | Array
+    },
   },
   computed: {
     selection() {
@@ -110,11 +117,26 @@ export default {
           }
         }
 
+        // other extend menu
+        if (this.otherExtendedMenus) {
+          var AddClassMenu = require('./menus/add-class').default
+
+          const otherExtendedMenusList = [AddClassMenu]
+
+          otherExtendedMenusList.forEach(m => {
+            if (testInList(m.name, this.otherExtendedMenus)) {
+              this.wang.menus.extend(m.name, m)
+              this.wang.config.menus.push(m.name)
+            }
+          })
+        }
+
         // extend menu, add first
         let extendedMenus = Object.assign({}, this._options.extendedMenus, this.extendedMenus)
         if (extendedMenus && Object.prototype.toString.call(extendedMenus) === '[object Object]') {
           Object.keys(extendedMenus).forEach((key) => {
             this.wang.menus.extend(key, extendedMenus[key])
+            this.wang.config.menus.push(key)
           })
         }
         delete this._options.extendedMenus
