@@ -230,6 +230,9 @@ export default {
     getJSON() {
       return this.wang.txt.getJSON()
     },
+    setJSON() {
+      return this.wang.txt.setJSON()
+    },
 
     destroy() {
       this.wang.destroy()

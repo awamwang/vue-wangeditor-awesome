@@ -297,6 +297,10 @@ Return to `this.wang.cmd.do`, refer to [Content Operation API](http://www.wanged
 
 Expose the `getJSON` method of wangEditor, Refer to [获取 JSON](https://www.kancloud.cn/wangfupeng/wangeditor3/455792)
 
+#### setJSON
+
+Expose the `setJSON` method of wangEditor
+
 #### clear
 
 Expose the `clear` method of wangEditor, use to clear the content

@@ -294,6 +294,10 @@ other-extended-menus=“[]”
 
 暴露 wangEditor 的`getJSON`方法，参考[获取 JSON](https://www.kancloud.cn/wangfupeng/wangeditor3/455792)
 
+#### setJSON
+
+暴露 wangEditor 的`setJSON`方法
+
 #### clear
 
 暴露 wangEditor 的`clear`方法，清除内容
