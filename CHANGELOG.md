@@ -1,3 +1,13 @@
+# [4.3.0](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.2.2...v4.3.0) (2020-11-17)
+
+
+### Features
+
+* 暴露wangEditor新增的setJSON方法 ([a8bf968](https://github.com/awamwang/vue-wangeditor-awesome/commit/a8bf968bb0f7f167644ec53e21e5f301b1aac9ec))
+* **wangeditor:** wangEditor 4.3.0 ([d34c8a6](https://github.com/awamwang/vue-wangeditor-awesome/commit/d34c8a6f5e6518f8edc377bc6ba3b5bc573a2fde))
+
+
+
 ## [4.2.2](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.2.1...v4.2.2) (2020-11-17)
 
 
