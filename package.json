@@ -47,7 +47,8 @@
     "cy-run": "cypress run -C cypress.json",
     "build-readme": "gh-md-toc --insert README.md && gh-md-toc --insert README.zh_CN.md && rm README*.md.orig.* && rm README*.md.toc.*",
     "prebuild": "rimraf ./dist && mkdir dist",
-    "test": "npm run cy-run"
+    "test": "npm run cy-run",
+    "upgrade-wangeditor": "npm i wangeditor@$WANG_VER -E && git add . && git commit -m \"feat(wangeditor): wangEditor ${WANG_VER}\" && npm version patch"
   },
   "repository": {
     "type": "git",
