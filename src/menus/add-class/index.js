@@ -1,8 +1,7 @@
 import { Editor } from '../../index'
 import createPanelConf from './create-panel-conf'
 import isActive from './is-active'
-const { $ } = Editor
-const { PanelMenu, Panel } = Editor.menuConstructors
+const { $, PanelMenu, Panel } = Editor
 
 // const icon = 'w-e-icon-terminal'
 const icon = ''
