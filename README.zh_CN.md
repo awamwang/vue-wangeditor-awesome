@@ -11,10 +11,10 @@
 [English Doc](README.md)|[中文文档](README.zh_CN.md)
 
 
-
-wangEditor升级为4.0版本——[新版本文档](http://www.wangeditor.com/doc/)
-
 中文富文本编辑工具[wangEditor](https://github.com/wangeditor-team/wangEditor)的 Vue 插件封装
+
+[wangEditor 4.0 版本文档](http://www.wangeditor.com/doc/)
+
 
 [TOC]
 

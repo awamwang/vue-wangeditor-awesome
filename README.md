@@ -12,9 +12,9 @@
 
 
 
-wangEditor upgrade to version 4.0-[new version document](http://www.wangeditor.com/doc/)
-
 Vue component for RichText editor [wangEditor](https://github.com/wangeditor-team/wangEditor)
+
+[wangEditor version 4.0 document](http://www.wangeditor.com/doc/)
 
 [toc]
 
