@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+  <script src="//unpkg.com/wangeditor/dist/wangEditor.min.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue-wangeditor-awesome@4.0.3"></script> -->
+  <script src="../../dist/vue-wangeditor-awesome.umd.js"></script>
+</head>
+
+<body>
+  <div id="demo">
+    <vue-wang-editor v-model="content"></vue-wang-editor>
+  </div>
+  
+  <div id="div1"></div>
+  <script type="text/javascript">
+    const E = window.wangEditor
+    const editor = new E('#div1')
+    // 或者 const editor = new E( document.getElementById('div1') )
+    editor.create()
+
+  </script>
+
+  <script src="./app.js"></script>
+</body>
+
+</html>
