@@ -13,15 +13,19 @@
     "src"
   ],
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "vue-hot-reload-api": "^2.3.4",
     "wangeditor": "4.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",
     "@vue/component-compiler-utils": "^3.2.0",
     "babel-loader": "^8.1.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "cypress": "^5.2.0",
     "highlight.js": "^10.2.1",
     "husky": "^4.3.0",
