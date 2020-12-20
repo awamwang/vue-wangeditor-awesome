@@ -131,7 +131,10 @@ So you can:
 
 #### disabled-menus
 
-As a easier way to customize menus (toolbar), use `disabled-menus` prop to remove item from the default menus.
+As a easier way to customize menus (toolbar), use `disabled-menus` prop to remove item from the menus.
+Apply after `config.excludeMenus`.
+
+> Same as [`editor.config.excludeMenus`属性](http://www.wangeditor.com/doc/pages/03-%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95/01-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95.html#editor.config.excludeMenus). Not applied at same time, will not be removed soon.
 
 ```vue
 <WangEditor v-model="content" :options="options" :disabled-menus="['video']" @change="onEditorChange" ref="myEditor">

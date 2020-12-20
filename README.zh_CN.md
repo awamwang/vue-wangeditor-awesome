@@ -130,7 +130,10 @@ Vue.use(VueWangEditor, {
 
 #### disabled-menus
 
-为了方便定制 menus(toolbar)，加了一个`disabled-menus`prop，方便从默认的 menus 中剔除。
+为了方便定制 menus(toolbar)，加了一个`disabled-menus`prop，方便从 menus 中剔除。
+在`config.excludeMenus`后生效。
+
+> 与wangEditor的[`editor.config.excludeMenus`属性](http://www.wangeditor.com/doc/pages/03-%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95/01-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95.html#editor.config.excludeMenus)功能一致，但由于生效时机不同，暂时不会去掉这个属性
 
 ```vue
 <WangEditor v-model="content" :options="options" :disabled-menus="['video']" @change="onEditorChange" ref="myEditor">
