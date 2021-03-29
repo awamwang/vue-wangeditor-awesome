@@ -1,3 +1,12 @@
+## [4.6.11](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.6.10...v4.6.11) (2021-03-29)
+
+
+### Features
+
+* **wangeditor:** wangEditor 4.6.11 ([3b9e2d5](https://github.com/awamwang/vue-wangeditor-awesome/commit/3b9e2d5c8c11dc02d82c7d0ecc4e232438753113))
+
+
+
 ## [4.6.10](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.6.9...v4.6.10) (2021-03-29)
 
 
