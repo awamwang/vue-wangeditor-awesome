@@ -6,7 +6,7 @@ cache:
   - node_modules
   - "/home/travis/.cache/Cypress"
 node_js:
-- lts/*
+# - lts/*
 - 10
 before_install:
 install:
