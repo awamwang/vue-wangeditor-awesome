@@ -1,3 +1,12 @@
+## [4.7.12](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.7.11...v4.7.12) (2022-05-01)
+
+
+### Features
+
+* **wangeditor:** wangEditor 4.7.12 ([9c86de4](https://github.com/awamwang/vue-wangeditor-awesome/commit/9c86de4e2483985ade21a258daee4bb65836c796))
+
+
+
 ## [4.7.11](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.7.10...v4.7.11) (2022-01-10)
 
 
@@ -365,21 +374,13 @@
 
 
 
-# [4.2.0](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.1.0...v4.2.0) (2020-11-17)
-
-
-### Features
-
-* **wangeditor:** wangEditor 4.2.0 ([a02cb76](https://github.com/awamwang/vue-wangeditor-awesome/commit/a02cb761e217a73d0a5c1ec559acf0ec147ad5c1))
-
-
-
-# [4.1.0](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.0.8...v4.1.0) (2020-11-17)
+# [4.2.0](https://github.com/awamwang/vue-wangeditor-awesome/compare/v4.0.8...v4.2.0) (2020-11-17)
 
 
 ### Features
 
 * **wangeditor:** wangEditor 4.1.0 ([dd9c571](https://github.com/awamwang/vue-wangeditor-awesome/commit/dd9c571c5685f16325c49128d943ef1ba7171dc0))
+* **wangeditor:** wangEditor 4.2.0 ([a02cb76](https://github.com/awamwang/vue-wangeditor-awesome/commit/a02cb761e217a73d0a5c1ec559acf0ec147ad5c1))
 
 
 
