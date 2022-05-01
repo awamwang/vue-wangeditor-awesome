@@ -1,9 +1,8 @@
 
 
-[wangEditor](https://www.wangeditor.com/)已经开启了v5版本，同时提供了官方的vue插件，请参考[安装](https://www.wangeditor.com/v5/for-frame.html#%E5%AE%89%E8%A3%85)
+[wangEditor](https://www.wangeditor.com/) has stared new V5 version, and the official Vue plug-in. Please go to [Install](https://www.wangeditor.com/v5/for-frame.html#%E5%AE%89%E8%A3%85).
 
-本项目不再继续更新！！！
-------------------------
+## This project will no longer continue to be updated!!!
 
 [npm Version][npm page]
 [![GitHub stars](https://img.shields.io/github/stars/awamwang/vue-wangeditor-awesome.svg?style=flat-square)](https://github.com/awamwang/vue-wangeditor-awesome/stargazers)
