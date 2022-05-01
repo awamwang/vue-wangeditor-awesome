@@ -1,4 +1,8 @@
-[![npm Version][npm version badge]][npm page]
+[wangEditor](https://www.wangeditor.com/) has stared new V5 version, and the official Vue plug-in. Please go to [Install](https://www.wangeditor.com/v5/for-frame.html#%E5%AE%89%E8%A3%85).
+
+## This project will no longer continue to be updated!!!
+
+[npm Version][npm page]
 [![GitHub stars](https://img.shields.io/github/stars/awamwang/vue-wangeditor-awesome.svg?style=flat-square)](https://github.com/awamwang/vue-wangeditor-awesome/stargazers)
 [![Build Status](https://travis-ci.com/awamwang/vue-wangeditor-awesome.svg?branch=master)](https://travis-ci.com/awamwang/vue-wangeditor-awesome)
 [![GitHub issues](https://img.shields.io/github/issues/awamwang/vue-wangeditor-awesome.svg?style=flat-square)](https://github.com/awamwang/vue-wangeditor-awesome/issues)
@@ -10,15 +14,11 @@
 
 [English Doc](README.md)|[中文文档](README.zh_CN.md)
 
-
 中文富文本编辑工具[wangEditor](https://github.com/wangeditor-team/wangEditor)的 Vue 插件封装
 
 [wangEditor 4.0 版本文档](http://www.wangeditor.com/doc/)
 
-
-[TOC]
-
-
+[toc]
 
 ## Install
 
@@ -91,7 +91,7 @@ export default {
 
 ### 全局options
 
-在Vue.use中传入的options，除`directiveName`外，其他会作为wangEditor配置的默认值。
+在Vue.use中传入的options，除 `directiveName`外，其他会作为wangEditor配置的默认值。
 
 `directiveName`用来指定Vue组件名称
 
@@ -106,11 +106,11 @@ Vue.use(VueWangEditor, {
 
 ### prop options
 
-`options`属性会合并全局 options 后，在结合下面的更多属性，赋值给 wangEditor 的`config`，产生最终配置。
+`options`属性会合并全局 options 后，在结合下面的更多属性，赋值给 wangEditor 的 `config`，产生最终配置。
 
 ### more props
 
-为了方便，把[wangEditor 的 config](http://www.wangeditor.com/doc/pages/03-%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95/)属性也 hack(利用`$attrs`)到组件的 props 中。例如下面的`menus`、`colors`，这些配置的优先级最高。
+为了方便，把[wangEditor 的 config](http://www.wangeditor.com/doc/pages/03-%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95/)属性也 hack(利用 `$attrs`)到组件的 props 中。例如下面的 `menus`、`colors`，这些配置的优先级最高。
 
 所以你可以这么用
 
@@ -130,8 +130,8 @@ Vue.use(VueWangEditor, {
 
 #### disabled-menus
 
-为了方便定制 menus(toolbar)，加了一个`disabled-menus`prop，方便从 menus 中剔除。
-在`config.excludeMenus`后生效。
+为了方便定制 menus(toolbar)，加了一个 `disabled-menus`prop，方便从 menus 中剔除。
+在 `config.excludeMenus`后生效。
 
 > 与wangEditor的[`editor.config.excludeMenus`属性](http://www.wangeditor.com/doc/pages/03-%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95/01-%E8%87%AA%E5%AE%9A%E4%B9%89%E8%8F%9C%E5%8D%95.html#editor.config.excludeMenus)功能一致，但由于生效时机不同，暂时不会去掉这个属性
 
@@ -142,7 +142,7 @@ Vue.use(VueWangEditor, {
 
 #### split-layout
 
-添加`split-layout`prop 属性，用来支持 menu 和 container 拆分创建。
+添加 `split-layout`prop 属性，用来支持 menu 和 container 拆分创建。
 
 ```vue
 <WangEditor v-model="content" :options="options" split-layout :disabled="false" @change="onEditorChange" class="editor c-scroll" ref="myEditor">
@@ -197,7 +197,7 @@ Vue.use(VueWangEditor, {
 
 ##### 组件prop
 
-将扩展菜单名字-扩展菜单实现类的键值对（Object）传入`extended-menus` prop，会在创建时注册这些扩展菜单
+将扩展菜单名字-扩展菜单实现类的键值对（Object）传入 `extended-menus` prop，会在创建时注册这些扩展菜单
 
 ```vue
 <template>
@@ -241,7 +241,7 @@ other-extended-menus=“[]”
 
 #### selection
 
-返回`this.wang.selection`，参考[选区范围 API](http://www.wangeditor.com/doc/pages/08-%E5%B8%B8%E7%94%A8API/02-%E9%80%89%E5%8C%BA%E8%8C%83%E5%9B%B4API.html)
+返回 `this.wang.selection`，参考[选区范围 API](http://www.wangeditor.com/doc/pages/08-%E5%B8%B8%E7%94%A8API/02-%E9%80%89%E5%8C%BA%E8%8C%83%E5%9B%B4API.html)
 
 ### 生命周期钩子
 
@@ -251,7 +251,7 @@ other-extended-menus=“[]”
 
 在wangEditor实例创建后立即执行
 
-`Function`类型，接受两个参数，如果明确返回`false`，则终止wangEditor创建编辑器的后续过程（即不执行create方法），并执行销毁处理。
+`Function`类型，接受两个参数，如果明确返回 `false`，则终止wangEditor创建编辑器的后续过程（即不执行create方法），并执行销毁处理。
 
 | 名称     | 描述             | 组件内部值    |
 | -------- | ---------------- | ------------- |
@@ -274,7 +274,7 @@ other-extended-menus=“[]”
 
 在wangEditor的设置完毕后，调用create前执行。可以在这个钩子中对wangEditor的config进行最终修改。
 
-`Function`类型，接受两个参数，如果明确返回`false`，则终止wangEditor创建编辑器的后续过程（即不执行create方法），并执行销毁处理。
+`Function`类型，接受两个参数，如果明确返回 `false`，则终止wangEditor创建编辑器的后续过程（即不执行create方法），并执行销毁处理。
 
 | 名称     | 描述                       | 组件内部值       |
 | -------- | -------------------------- | ---------------- |
@@ -291,25 +291,25 @@ other-extended-menus=“[]”
 
 #### insertHtml
 
-返回`this.wang.cmd.do`，参考[内容操作 API](http://www.wangeditor.com/doc/pages/08-%E5%B8%B8%E7%94%A8API/03-%E5%86%85%E5%AE%B9%E6%93%8D%E4%BD%9CAPI.html)
+返回 `this.wang.cmd.do`，参考[内容操作 API](http://www.wangeditor.com/doc/pages/08-%E5%B8%B8%E7%94%A8API/03-%E5%86%85%E5%AE%B9%E6%93%8D%E4%BD%9CAPI.html)
 
 #### getJSON
 
-暴露 wangEditor 的`getJSON`方法，参考[获取 JSON](https://www.kancloud.cn/wangfupeng/wangeditor3/455792)
+暴露 wangEditor 的 `getJSON`方法，参考[获取 JSON](https://www.kancloud.cn/wangfupeng/wangeditor3/455792)
 
 #### setJSON
 
-暴露 wangEditor 的`setJSON`方法
+暴露 wangEditor 的 `setJSON`方法
 
 #### clear
 
-暴露 wangEditor 的`clear`方法，清除内容
+暴露 wangEditor 的 `clear`方法，清除内容
 
 ### Events
 
-在没有通过`onxxx` options修改wangEidtor的回调时，默认emit 下面事件
+在没有通过 `onxxx` options修改wangEidtor的回调时，默认emit 下面事件
 
-除了`input`和`change`，其他事件回调的参数都是 wangEditor 实例(this.wang)本身
+除了 `input`和 `change`，其他事件回调的参数都是 wangEditor 实例(this.wang)本身
 
 #### ready
 
@@ -353,7 +353,7 @@ see [CHANGELOG.md](CHANGELOG.md)
 
 ### 图片
 
-默认开启了`uploadImgShowBase64`选项，这样可以 0 配置支持图标。
+默认开启了 `uploadImgShowBase64`选项，这样可以 0 配置支持图标。
 
 优化参考：
 
@@ -394,8 +394,6 @@ export default {
 ### 关于source-maps
 
 4.0的wangEditor npm包没有source maps，导致该组件也暂时无法提供source maps
-
-
 
 [build badge]: https://travis-ci.com/awamwang/vue-wangeditor-awesome.svg?branch=master
 [build page]: https://travis-ci.com/awamwang/vue-wangeditor-awesome

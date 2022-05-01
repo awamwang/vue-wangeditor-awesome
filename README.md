@@ -1,4 +1,11 @@
-[![npm Version][npm version badge]][npm page]
+
+
+[wangEditor](https://www.wangeditor.com/)已经开启了v5版本，同时提供了官方的vue插件，请参考[安装](https://www.wangeditor.com/v5/for-frame.html#%E5%AE%89%E8%A3%85)
+
+本项目不再继续更新！！！
+------------------------
+
+[npm Version][npm page]
 [![GitHub stars](https://img.shields.io/github/stars/awamwang/vue-wangeditor-awesome.svg?style=flat-square)](https://github.com/awamwang/vue-wangeditor-awesome/stargazers)
 [![Build Status](https://travis-ci.com/awamwang/vue-wangeditor-awesome.svg?branch=master)](https://travis-ci.com/awamwang/vue-wangeditor-awesome)
 [![GitHub issues](https://img.shields.io/github/issues/awamwang/vue-wangeditor-awesome.svg?style=flat-square)](https://github.com/awamwang/vue-wangeditor-awesome/issues)
@@ -9,8 +16,6 @@
 # vue-wangeditor-awesome
 
 [English Doc](README.md)|[中文文档](README.zh_CN.md)
-
-
 
 Vue component for RichText editor [wangEditor](https://github.com/wangeditor-team/wangEditor)
 
@@ -40,7 +45,6 @@ or
 
 ## Usage
 
-
 ### global component
 
 ```js
@@ -65,7 +69,7 @@ export default {
 ## Features
 
 - All configurations and features of [wangEditor](https://github.com/wangeditor-team/wangEditor)
--  feature, which is enabled through the [splitLayout](#split-layout) property
+- feature, which is enabled through the [splitLayout](#split-layout) property
 - Some custom menu extensions, refer to [Built-in custom menu (experimental stage)](#Built-in custom menu)
 
 ### Built-in custom menu
@@ -109,7 +113,7 @@ The `options` attribute will be merged with the global options, more props below
 
 ### more props
 
-For convenience, hack(using `$attrs`) [wangEditor's config](http://www.wangeditor.com/doc/pages/03-%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95/) to component's props.  For example, the following `menus`, `colors`.
+For convenience, hack(using `$attrs`) [wangEditor&#39;s config](http://www.wangeditor.com/doc/pages/03-%E9%85%8D%E7%BD%AE%E8%8F%9C%E5%8D%95/) to component's props.  For example, the following `menus`, `colors`.
 
 > those configurations have the highest priority.
 
@@ -395,8 +399,6 @@ export default {
 ### About source-maps
 
 The 4.0 npm package of wangEditor does not have source maps, so the component is temporarily unable to provide source maps
-
-
 
 [build badge]: https://travis-ci.com/awamwang/vue-wangeditor-awesome.svg?branch=master
 [build page]: https://travis-ci.com/awamwang/vue-wangeditor-awesome
